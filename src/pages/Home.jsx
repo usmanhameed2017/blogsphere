@@ -1,9 +1,17 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Hero from '../components/hero';
 import CardBS from '../components/card';
+import axios from 'axios';
+import { fetchAllBlogs } from '../api/blogs';
 
 function Home() 
 {
+    useEffect(() => {
+        fetchAllBlogs()
+        .then(response => console.log(response))
+        .catch(error => console.log(error));
+    },[]);
+    
     return (
         <div>
             {/* Hero section */}
