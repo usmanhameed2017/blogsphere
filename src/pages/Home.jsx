@@ -6,34 +6,41 @@ function Home()
 {
     return (
         <div>
+            {/* Hero section */}
             <Hero />
-            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
 
+            {/* Stylish Divider */}
+            <div className="section-divider">
+                Top Recent Blogs
+            </div>
+
+            {/* Blog cards */}
+            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
                 <CardBS 
-                imgSrc="https://source.unsplash.com/random/400x300"
+                coverImage="http://res.cloudinary.com/dz7oftoqu/image/upload/v1747906593/xyi5cmedppmj8dmsexbs.jpg"
                 title="A Journey Through React"
                 description="Discover the power of React components and build stunning UIs."
                 likes={120}
                 comments={45}
-                authorImg="https://i.pravatar.cc/150?img=5"
+                authorImage="https://i.pravatar.cc/150?img=5"
                 authorName="John Doe" />
 
                 <CardBS 
-                imgSrc="https://source.unsplash.com/random/401x300"
+                coverImage="http://res.cloudinary.com/dz7oftoqu/image/upload/v1747906593/xyi5cmedppmj8dmsexbs.jpg"
                 title="Express Your Ideas"
                 description="Learn how to express yourself with a modern blogging platform."
                 likes={98}
                 comments={33}
-                authorImg="https://i.pravatar.cc/150?img=7"
+                authorImage="https://i.pravatar.cc/150?img=7"
                 authorName="Jane Smith" />
 
                 <CardBS 
-                imgSrc="https://source.unsplash.com/random/401x300"
+                coverImage="http://res.cloudinary.com/dz7oftoqu/image/upload/v1747906593/xyi5cmedppmj8dmsexbs.jpg"
                 title="Express Your Ideas"
                 description="Learn how to express yourself with a modern blogging platform."
                 likes={98}
                 comments={33}
-                authorImg="https://i.pravatar.cc/150?img=7"
+                authorImage="https://i.pravatar.cc/150?img=7"
                 authorName="Jane Smith" />              
             </div>            
         </div>

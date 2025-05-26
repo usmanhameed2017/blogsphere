@@ -103,7 +103,36 @@ a {
   box-shadow: 0 6px 15px rgba(0,194,203,0.6);
 }
 
-/* Card CSS */
+
+/* Section divider style */
+.section-divider {
+  text-align: center;
+  margin: 2rem auto;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #00c2cb;
+  position: relative;
+  width: 80%;
+}
+
+.section-divider::before, .section-divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 35%;
+  height: 2px;
+  background-color: #00c2cb;
+}
+
+.section-divider::before {
+  left: 0;
+}
+
+.section-divider::after {
+  right: 0;
+}
+
+
 /* Card Styles */
 .blog-card {
   background-color: #1e1f26;
@@ -114,6 +143,10 @@ a {
   max-width: 350px;
   margin: 1rem auto;
   cursor: pointer;
+
+  /* Flex layout for card container */
+  display: flex;
+  flex-direction: column;
 }
 
 .blog-card:hover {
@@ -130,6 +163,9 @@ a {
 .card-content {
   padding: 1rem;
   color: #fff;
+
+  /* Allow content to take available space */
+  flex-grow: 1;
 }
 
 .card-content h2 {
@@ -149,7 +185,11 @@ a {
   align-items: center;
   background-color: #2a2b33;
   padding: 0.8rem 1rem;
+
+  /* Remove flex-grow from footer to avoid it expanding */
+  flex-grow: 0;
 }
+
 
 .meta span {
   color: #00c2cb;
