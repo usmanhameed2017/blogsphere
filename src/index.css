@@ -24,8 +24,8 @@ a {
 
 /* Navbar Customization */
 .navbar {
-  background: linear-gradient(90deg, #ff6f61, #ffcb05, #00c2cb);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+  background: linear-gradient(90deg, #1e1f26, #3a3f5a, #4b6cb7, #182848);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
 }
 
 .navbar-brand img {
@@ -39,11 +39,12 @@ a {
 .nav-link {
   color: #ffffff !important;
   margin-right: 1rem;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .nav-link:hover {
-  color: #ffcb05 !important;
+  color: #00c2cb !important;
+  text-shadow: 0 0 10px #00c2cb;
 }
 
 .navbar-text input {
@@ -86,16 +87,18 @@ a {
 .home-hero button {
   margin-top: 2rem;
   padding: 0.7rem 1.5rem;
-  background-color: #ffcb05;
-  color: #1e1f26;
+  background-color: #3a506b; /* Dark bluish button */
+  color: #ffffff;
   border: none;
   border-radius: 30px;
   font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .home-hero button:hover {
-  background-color: #00c2cb;
-  color: #fff;
+  background-color: #00c2cb; /* Cyan highlight on hover */
+  color: #1e1f26;
+  box-shadow: 0 6px 15px rgba(0,194,203,0.6);
 }
