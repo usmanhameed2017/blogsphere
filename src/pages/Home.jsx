@@ -6,11 +6,18 @@ import { fetchAllBlogs } from '../api/blogs';
 
 function Home() 
 {
+    const [blogs, setBlogs] = useState(null);
+
     useEffect(() => {
         fetchAllBlogs()
-        .then(response => console.log(response))
+        .then(response => {
+            setBlogs(response.data);
+            console.log(response);
+        })
         .catch(error => console.log(error));
     },[]);
+
+    console.log("Blogs", blogs);
     
     return (
         <div>
@@ -22,35 +29,27 @@ function Home()
                 Top Recent Blogs
             </div>
 
-            {/* Blog cards */}
+            {/* Blog cards container */}
             <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-                <CardBS 
-                coverImage="http://res.cloudinary.com/dz7oftoqu/image/upload/v1747906593/xyi5cmedppmj8dmsexbs.jpg"
-                title="A Journey Through React"
-                description="Discover the power of React components and build stunning UIs."
-                likes={120}
-                comments={45}
-                authorImage="https://i.pravatar.cc/150?img=5"
-                authorName="John Doe" />
-
-                <CardBS 
-                coverImage="http://res.cloudinary.com/dz7oftoqu/image/upload/v1747906593/xyi5cmedppmj8dmsexbs.jpg"
-                title="Express Your Ideas"
-                description="Learn how to express yourself with a modern blogging platform."
-                likes={98}
-                comments={33}
-                authorImage="https://i.pravatar.cc/150?img=7"
-                authorName="Jane Smith" />
-
-                <CardBS 
-                coverImage="http://res.cloudinary.com/dz7oftoqu/image/upload/v1747906593/xyi5cmedppmj8dmsexbs.jpg"
-                title="Express Your Ideas"
-                description="Learn how to express yourself with a modern blogging platform."
-                likes={98}
-                comments={33}
-                authorImage="https://i.pravatar.cc/150?img=7"
-                authorName="Jane Smith" />              
-            </div>            
+                {
+                    blogs?.docs && blogs?.docs?.length > 0 ? blogs?.docs?.map(blog => (
+                        <CardBS 
+                            key={blog._id}
+                            coverImage={blog.coverImage}
+                            title={blog.title}
+                            description={blog.description}
+                            totalLikes={blog.totalLikes}
+                            totalComments={blog.totalComments}
+                            authorImage={blog.createdBy.profile_image}
+                            authorName={blog.createdBy.name} 
+                        /> 
+                    ))
+                    : 
+                    <h2 style={{ textAlign: 'center', width: '100%', marginTop: '2rem' }}>
+                        No Blogs Found.
+                    </h2>
+                }
+            </div>          
         </div>
     );
 }

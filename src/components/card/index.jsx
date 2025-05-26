@@ -1,6 +1,6 @@
 import React from 'react';
 
-function CardBS({ coverImage, title, description, likes, comments, authorImage, authorName }) 
+function CardBS({ coverImage, title, description, totalLikes, totalComments, authorImage, authorName }) 
 {
     return (
         <div className="blog-card">
@@ -18,8 +18,8 @@ function CardBS({ coverImage, title, description, likes, comments, authorImage, 
             {/* Footer */}
             <div className="card-footer">
                 <div className="meta">
-                    <span>👍 {likes}</span>
-                    <span>💬 {comments}</span>
+                    <span>👍 {totalLikes}</span>
+                    <span>💬 {totalComments}</span>
                 </div>
                 <div className="author">
                     <img src={authorImage} alt={authorName} className="author-img" />
