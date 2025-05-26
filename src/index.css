@@ -1,0 +1,101 @@
+/* Reset & Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  scroll-behavior: smooth;
+  font-size: 19px;
+}
+
+body {
+  background-color: #1e1f26;
+  color: #ffffff;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.container-fluid {
+  padding: 0 2rem;
+}
+
+/* Navbar Customization */
+.navbar {
+  background: linear-gradient(90deg, #ff6f61, #ffcb05, #00c2cb);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+.navbar-brand img {
+  transition: transform 0.3s ease;
+}
+
+.navbar-brand img:hover {
+  transform: scale(1.1) rotate(10deg);
+}
+
+.nav-link {
+  color: #ffffff !important;
+  margin-right: 1rem;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #ffcb05 !important;
+}
+
+.navbar-text input {
+  border: none;
+  padding: 0.3rem 0.6rem;
+  border-radius: 20px;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.home-hero {
+  text-align: center;
+  padding: 5rem 1rem;
+  animation: fadeInUp 1s ease-in-out;
+}
+
+.home-hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #ff6f61;
+}
+
+.home-hero p {
+  font-size: 1.2rem;
+  color: #cccccc;
+  max-width: 600px;
+  margin: auto;
+}
+
+.home-hero button {
+  margin-top: 2rem;
+  padding: 0.7rem 1.5rem;
+  background-color: #ffcb05;
+  color: #1e1f26;
+  border: none;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.home-hero button:hover {
+  background-color: #00c2cb;
+  color: #fff;
+}
