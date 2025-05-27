@@ -38,7 +38,9 @@ function Home()
                             coverImage={blog.coverImage}
                             title={blog.title}
                             description={blog.description}
+                            likes={blog.likes}
                             totalLikes={blog.totalLikes}
+                            comments={blog.comments}
                             totalComments={blog.totalComments}
                             authorImage={blog.createdBy.profile_image}
                             authorName={blog.createdBy.name} 
