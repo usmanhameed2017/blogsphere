@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Row, Col, Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 function NavbarBS()
 {
@@ -27,37 +28,16 @@ function NavbarBS()
 
                                 {/* Nav */}
                                 <Nav className='me-auto fw-bold'>
-
                                     {/* Links */}
-                                    <Nav.Link href='/'> Home </Nav.Link>
-                                    <Nav.Link href='/about'> About </Nav.Link>
-
-                                    {/* Dropdown */}
-                                    <NavDropdown title='Services' id='my-nav'>
-                                        <NavDropdown.Header> Heading 1 </NavDropdown.Header>
-                                        <NavDropdown.Item> Service 1 </NavDropdown.Item>
-                                        <NavDropdown.Item> Service 2 </NavDropdown.Item>
-                                        <NavDropdown.Divider />
-
-                                        <NavDropdown.Header> Heading 2 </NavDropdown.Header>
-                                        <NavDropdown.Item> Service 3 </NavDropdown.Item>
-                                        <NavDropdown.Item> Service 4 </NavDropdown.Item>
-                                        <NavDropdown.Divider />
-
-                                        <NavDropdown.Header> Heading 3 </NavDropdown.Header>
-                                        <NavDropdown.Item> Service 5 </NavDropdown.Item>
-                                        <NavDropdown.Item> Service 6 </NavDropdown.Item>
-                                        <NavDropdown.Item> Service 7 </NavDropdown.Item>
-                                    </NavDropdown>
-
-                                    {/* Links */}
-                                    <Nav.Link href='/privacy'> Privacy </Nav.Link>
-                                    <Nav.Link href='/contact'> Contact </Nav.Link>
+                                    <Nav.Link> <Link to={`/`}>  Home </Link> </Nav.Link>
+                                    <Nav.Link> <Link to={`/about`}> About </Link> </Nav.Link>
+                                    <Nav.Link> <Link to={`/contact`}> Contact </Link> </Nav.Link>
+                                    <Nav.Link> <Link to={`/privacy`}> Privacy </Link> </Nav.Link>
                                 </Nav>
 
                                 {/* Navbar Text - Search Field */}
                                 <Navbar.Text> 
-                                    <input type="search" className='form-control' placeholder='Search' /> 
+                                    <Nav.Link> <Link to={`/contact`}> Signin/Signup </Link> </Nav.Link>
                                 </Navbar.Text>
 
                             </Navbar.Collapse>
