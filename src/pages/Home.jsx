@@ -3,6 +3,7 @@ import Hero from '../components/hero';
 import CardBS from '../components/card';
 import { fetchAllBlogs } from '../api/blogs';
 import About from './About';
+import Contact from './Contact';
 
 function Home() 
 {
@@ -52,7 +53,9 @@ function Home()
                 }
             </div>
 
-            <About />        
+            <About />  
+
+            <Contact />      
         </div>
     );
 }

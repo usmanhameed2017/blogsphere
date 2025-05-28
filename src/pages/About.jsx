@@ -69,17 +69,6 @@ function About()
             {/* Divider */}
             <div className="section-divider">Fun & Creativity</div>
 
-            {/* Fun and Animated Section */}
-            {/* <section className="about-fun">
-                <div className="fun-icons">
-                    <FaPencilAlt className="fun-icon spin" title="Write Blogs" />
-                    <FaComments className="fun-icon bounce" title="Comment & Interact" />
-                    <FaHeart className="fun-icon pulse" title="Spread Love" />
-                    <FaRocket className="fun-icon fly" title="Launch Your Ideas" />
-                    <FaLightbulb className="fun-icon glow" title="Creative Inspiration" />
-                </div>
-            </section> */}
-
             {/* Blog and Community Features */}
             <section className="about-features">
                 <div className="feature-card">
@@ -109,14 +98,6 @@ function About()
                         This isn’t just a blogging platform; it’s a launchpad for creativity. Here, your ideas aren’t confined to drafts or notebooks—they take flight. We provide tools, inspiration, and a community that helps turn concepts into captivating content. Whether you’re a storyteller, a tech enthusiast, or a creative artist, our platform supports your journey from idea to execution. And it doesn’t stop at posting; our analytics, feedback systems, and engagement tools ensure your creations evolve and reach their full potential. Let’s collaborate, experiment, and create something amazing together. Your imagination is the limit, and we’re here to amplify it.
                     </p>
                 </div>
-            </section>
-
-            {/* Closing Section */}
-            <section className="about-footer">
-                <h2>Join Us on This Journey</h2>
-                <p>
-                    Let's build something extraordinary together. Stay connected, share your voice, and let's shape the future of meaningful content!
-                </p>
             </section>
         </div>
     );

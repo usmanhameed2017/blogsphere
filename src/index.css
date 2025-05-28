@@ -11,6 +11,7 @@
 body {
   background-color: #1e1f26;
   color: #ffffff;
+  overflow-x: hidden;
 }
 
 a {
@@ -278,19 +279,19 @@ a {
   font-size: 1rem;
 }
 
-.about-footer {
+.end-section {
   text-align: center;
   margin-top: 4rem;
   animation: fadeInUp 1s ease-in-out;
 }
 
-.about-footer h2 {
+.end-section h2 {
   font-size: 2rem;
   color: #00c2cb;
   margin-bottom: 1rem;
 }
 
-.about-footer p {
+.end-section p {
   color: #ccc;
   max-width: 600px;
   margin: auto;
@@ -355,7 +356,7 @@ a {
 
 /* Footer Style */
 .footer-section {
-  background: linear-gradient(135deg, #1e1e1e, #2e2e2e);
+  background: #1e1f26;
   color: #ccc;
   padding: 40px 0;
 }
@@ -401,4 +402,88 @@ a {
   padding-top: 1rem;
   font-size: 0.9rem;
   color: #ccc;
+}
+
+
+/* Contact Styling */
+.contact-fullscreen {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Remove horizontal scroll */
+  flex-wrap: nowrap; /* default no wrap */
+}
+
+.contact-left,
+.contact-right {
+  flex: 1; /* 50% width each */
+  height: 100%;
+}
+
+.contact-left {
+  overflow: hidden;
+}
+
+.contact-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.contact-right {
+  background-color: #1e1f26;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.contact-form {
+  width: 100%;
+  max-width: 500px;
+  color: white;
+}
+
+.contact-form h2 {
+  color: #00c2cb;
+  margin-bottom: 1rem;
+}
+
+.custom-btn {
+  background-color: #3a506b;
+  border: none;
+  border-radius: 30px;
+  padding: 0.7rem 1.5rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.custom-btn:hover {
+  background-color: #00c2cb;
+  color: #1e1f26;
+  box-shadow: 0 6px 15px rgba(0, 194, 203, 0.6);
+}
+
+/* 📱 Responsive for Mobile */
+@media (max-width: 768px) {
+  .contact-fullscreen {
+    flex-direction: column; /* Stack image and form vertically */
+    height: auto; /* Let it expand naturally */
+  }
+
+  .contact-left,
+  .contact-right {
+    width: 100%;
+    height: auto;
+  }
+
+  .contact-image {
+    height: 300px; /* Adjust as needed */
+  }
+
+  .contact-right {
+    padding: 1rem;
+  }
 }
