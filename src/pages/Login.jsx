@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { Tabs, Tab, Form, Button, Alert } from "react-bootstrap";
-import { Formik, Field, ErrorMessage } from 'formik';
+import { Tabs, Tab, Button, Alert } from "react-bootstrap";
+import { Form, Field, ErrorMessage } from 'formik';
+import FormBS from "../components/form";
+import { loginInitialValues } from "../schema/user";
+import { loginValidation } from "../validation/user";
 
 function Login() 
 {
-    const [error, setError] = useState("");
     return (
         <div
         style={{
@@ -24,86 +26,30 @@ function Login()
 
             {/* Signin */}
             <Tab eventKey="Signin" title="Signin">
-                <Form className="text-white">
-                    {error && <Alert variant="danger"> {error} </Alert>}
+                <FormBS initialValues={loginInitialValues} validationSchema={loginValidation}>
+                    <Form>
+                        {/* Username */}
+                        <div className="form-group">
+                            <label htmlFor="username"> Username </label>
+                            <Field type='text' name='username' className='form-control' placeholder="Enter Name" />
+                            <span className="text-danger"> <ErrorMessage name="username" /> </span>
+                        </div>
 
-                    {/* Email */}
-                    <Form.Group className="mb-3" controlId="signinEmail">
-                        <Form.Label>Email address</Form.Label>
-                        <Form.Control type="email" name="email" placeholder="Enter Email" />
-                    </Form.Group>
+                        {/* Password */}
+                        <div className="form-group">
+                            <label htmlFor="password"> Password </label>
+                            <Field type='password' name='password' className='form-control' placeholder="Enter Password" />
+                            <span className="text-danger"> <ErrorMessage name="password" /> </span>
+                        </div>   
 
-                    {/* Password */}
-                    <Form.Group className="mb-3" controlId="signinPassword">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" name="password" placeholder="Enter Password" />
-                    </Form.Group>
-
-                    <Button type="submit" className="custom-btn w-100"> Sign In </Button>
-                </Form>
+                        <Button type="submit" className="custom-btn w-100 mt-3">Sign In</Button>                         
+                    </Form>
+                </FormBS>    
             </Tab>
 
             {/* Signup */}
             <Tab eventKey="Signup" title="Signup">
-                <Form className="text-white">
-                    {error && <Alert variant="danger">{error}</Alert>}
 
-                    {/* First Name */}
-                    <Form.Group className="mb-3" controlId="signupFName">
-                        <Form.Label> First Name </Form.Label>
-                        <Form.Control type="text" name="fname" placeholder="Enter First Name" />
-                    </Form.Group>
-
-                    {/* Last Name */}
-                    <Form.Group className="mb-3" controlId="signupFName">
-                        <Form.Label> Last Name </Form.Label>
-                        <Form.Control type="text" name="lname" placeholder="Enter Last Name" />
-                    </Form.Group>   
-
-                    {/* Age */}
-                    <Form.Group className="mb-3" controlId="signupFName">
-                        <Form.Label> Age </Form.Label>
-                        <Form.Control type="number" name="age" placeholder="Enter Age" />
-                    </Form.Group>   
-
-                    {/* Gender */}
-                    <Form.Group className="mb-3" controlId="signupFName">
-                        <Form.Label> Gender </Form.Label>
-                        <Form.Control type="number" name="gender" placeholder="Enter Gender" />
-                    </Form.Group>                                              
-
-                    {/* Email */}
-                    <Form.Group className="mb-3" controlId="signupFName">
-                        <Form.Label> Email </Form.Label>
-                        <Form.Control type="text" name="email" placeholder="Enter Email" />
-                    </Form.Group>
-
-                    {/* Username */}
-                    <Form.Group className="mb-3" controlId="signupFName">
-                        <Form.Label> Username </Form.Label>
-                        <Form.Control type="text" name="username" placeholder="Enter Username" />
-                    </Form.Group>                
-
-                    {/* Password */}
-                    <Form.Group className="mb-3" controlId="signupFName">
-                        <Form.Label> Password </Form.Label>
-                        <Form.Control type="password" name="password" placeholder="Enter Password" />
-                    </Form.Group>
-
-                    {/* Confirm Password */}
-                    <Form.Group className="mb-3" controlId="signupFName">
-                        <Form.Label> Confirm Password </Form.Label>
-                        <Form.Control type="password" name="cpassword" placeholder="Re-Enter Password" />
-                    </Form.Group>
-
-                    {/* Profile Image Upload */}
-                    <Form.Group className="mb-3" controlId="signupProfile">
-                        <Form.Label>Profile Image</Form.Label>
-                        <Form.Control type="file" name="profile_image" accept="image/*" />
-                    </Form.Group>                 
-
-                    <Button type="submit" className="custom-btn w-100"> Sign Up </Button>
-                </Form>
             </Tab>
         </Tabs>
         </div>
