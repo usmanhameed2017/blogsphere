@@ -5,6 +5,7 @@ import { Routes, Route } from 'react-router-dom';
 import About from './pages/About';
 import Footer from './components/footer';
 import Contact from './pages/Contact';
+import Login from './pages/Login';
 
 function App() 
 {
@@ -15,6 +16,7 @@ function App()
         <Route path='/' element={ <Home /> } />
         <Route path='/about' element={ <About /> } />
         <Route path='/contact' element={ <Contact /> } />
+        <Route path='/login' element={ <Login /> } />
       </Routes>
       
       {/* Closing Section */}

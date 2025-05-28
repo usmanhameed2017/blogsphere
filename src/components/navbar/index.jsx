@@ -37,7 +37,7 @@ function NavbarBS()
 
                                 {/* Navbar Text - Search Field */}
                                 <Navbar.Text> 
-                                    <NavLink> Signin/Signup </NavLink>
+                                    <NavLink to={`/login`}> Signin/Signup </NavLink>
                                 </Navbar.Text>
 
                             </Navbar.Collapse>
