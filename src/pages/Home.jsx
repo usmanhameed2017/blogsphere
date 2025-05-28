@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Hero from '../components/hero';
 import CardBS from '../components/card';
-import axios from 'axios';
 import { fetchAllBlogs } from '../api/blogs';
+import About from './About';
 
 function Home() 
 {
@@ -34,24 +34,25 @@ function Home()
                 {
                     blogs?.docs && blogs?.docs?.length > 0 ? blogs?.docs?.map(blog => (
                         <CardBS 
-                            key={blog._id}
-                            coverImage={blog.coverImage}
-                            title={blog.title}
-                            description={blog.description}
-                            likes={blog.likes}
-                            totalLikes={blog.totalLikes}
-                            comments={blog.comments}
-                            totalComments={blog.totalComments}
-                            authorImage={blog.createdBy.profile_image}
-                            authorName={blog.createdBy.name} 
-                        /> 
+                        key={blog._id}
+                        coverImage={blog.coverImage}
+                        title={blog.title}
+                        description={blog.description}
+                        likes={blog.likes}
+                        totalLikes={blog.totalLikes}
+                        comments={blog.comments}
+                        totalComments={blog.totalComments}
+                        authorImage={blog.createdBy.profile_image}
+                        authorName={blog.createdBy.name} /> 
                     ))
                     : 
                     <h2 style={{ textAlign: 'center', width: '100%', marginTop: '2rem' }}>
                         No Blogs Found.
                     </h2>
                 }
-            </div>          
+            </div>
+
+            <About />        
         </div>
     );
 }
