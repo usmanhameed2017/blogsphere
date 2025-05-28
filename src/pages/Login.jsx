@@ -4,9 +4,11 @@ import { Form, Field, ErrorMessage } from 'formik';
 import FormBS from "../components/form";
 import { loginInitialValues } from "../schema/user";
 import { loginValidation } from "../validation/user";
+import { useAuth } from "../context/auth";
 
 function Login() 
 {
+    const { userLogin } = useAuth();
     return (
         <div
         style={{
@@ -26,7 +28,7 @@ function Login()
 
             {/* Signin */}
             <Tab eventKey="Signin" title="Signin">
-                <FormBS initialValues={loginInitialValues} validationSchema={loginValidation}>
+                <FormBS initialValues={loginInitialValues} validationSchema={loginValidation} handlerFunction={userLogin}>
                     <Form>
                         {/* Username */}
                         <div className="form-group">
