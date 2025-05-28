@@ -1,6 +1,7 @@
 import React from 'react';
-import { Container, Row, Col, Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import { Container, Row, Col, Navbar, Nav } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
+import { FaLock } from "react-icons/fa"; // Font Awesome Lock icon
 
 function NavbarBS()
 {
@@ -36,8 +37,9 @@ function NavbarBS()
                                 </Nav>
 
                                 {/* Navbar Text - Search Field */}
-                                <Navbar.Text> 
-                                    <NavLink to={`/login`}> Signin/Signup </NavLink>
+                                <Navbar.Text>
+                                    <NavLink to="/login" className="signin-link"> <FaLock style={{ marginRight: "5px" }} /> Signin / Signup
+                                    </NavLink>
                                 </Navbar.Text>
 
                             </Navbar.Collapse>

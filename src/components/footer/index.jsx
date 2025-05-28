@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedin, FaEnvelope } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 function Footer() 
 {
@@ -19,10 +20,10 @@ function Footer()
                     <Col md={3} sm={6} className="mb-4">
                         <h5>Quick Links</h5>
                         <ul className="list-unstyled">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Blogs</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li> <Link to={`/`}> Home  </Link> </li>
+                            <li> <Link to={`/about`}> About </Link> </li>
+                            <li> <Link to={`/blog`}> Blogs </Link> </li>
+                            <li> <Link to={`/contact`}> Contact  </Link></li>
                             <li><a href="#">Privacy Policy</a></li>
                         </ul>
                     </Col>

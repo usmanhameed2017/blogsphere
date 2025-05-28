@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Tabs, Tab, Form, Button, Alert } from "react-bootstrap";
+import { Formik, Field, ErrorMessage } from 'formik';
 
 function Login() 
 {
@@ -94,6 +95,12 @@ function Login()
                         <Form.Label> Confirm Password </Form.Label>
                         <Form.Control type="password" name="cpassword" placeholder="Re-Enter Password" />
                     </Form.Group>
+
+                    {/* Profile Image Upload */}
+                    <Form.Group className="mb-3" controlId="signupProfile">
+                        <Form.Label>Profile Image</Form.Label>
+                        <Form.Control type="file" name="profile_image" accept="image/*" />
+                    </Form.Group>                 
 
                     <Button type="submit" className="custom-btn w-100"> Sign Up </Button>
                 </Form>

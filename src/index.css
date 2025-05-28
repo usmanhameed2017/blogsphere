@@ -59,6 +59,16 @@ a {
   border-radius: 20px;
 }
 
+.signin-link {
+  color: #fff; /* Default color */
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.signin-link:hover {
+  color: #ffc107; /* Hover color, jaise baki links mein ho */
+}
+
 /* Animations */
 @keyframes fadeInUp {
   0% {
