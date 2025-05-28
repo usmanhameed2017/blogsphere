@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Row, Col, Navbar, Nav, NavDropdown } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 function NavbarBS()
 {
@@ -29,15 +29,15 @@ function NavbarBS()
                                 {/* Nav */}
                                 <Nav className='me-auto fw-bold'>
                                     {/* Links */}
-                                    <Nav.Link> <Link to={`/`}>  Home </Link> </Nav.Link>
-                                    <Nav.Link> <Link to={`/about`}> About </Link> </Nav.Link>
-                                    <Nav.Link> <Link to={`/contact`}> Contact </Link> </Nav.Link>
-                                    <Nav.Link> <Link to={`/privacy`}> Privacy </Link> </Nav.Link>
+                                    <NavLink to={`/`}>  Home </NavLink>
+                                    <NavLink to={`/about`}> About </NavLink>
+                                    <NavLink to={`/contact`}> Contact </NavLink>
+                                    <NavLink to={`/privacy`}> Privacy </NavLink>
                                 </Nav>
 
                                 {/* Navbar Text - Search Field */}
                                 <Navbar.Text> 
-                                    <Nav.Link> <Link to={`/contact`}> Signin/Signup </Link> </Nav.Link>
+                                    <NavLink> Signin/Signup </NavLink>
                                 </Navbar.Text>
 
                             </Navbar.Collapse>

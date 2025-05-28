@@ -36,13 +36,18 @@ a {
   transform: scale(1.1) rotate(10deg);
 }
 
-.nav-link {
+.navbar-nav a {
   color: #ffffff !important;
   margin-right: 1rem;
   transition: all 0.3s ease;
 }
 
-.nav-link:hover {
+.navbar-nav a:hover {
+  color: #00c2cb !important;
+  text-shadow: 0 0 10px #00c2cb;
+}
+
+.navbar-nav a.active {
   color: #00c2cb !important;
   text-shadow: 0 0 10px #00c2cb;
 }
