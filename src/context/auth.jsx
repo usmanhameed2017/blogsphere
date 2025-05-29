@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useState, useEffect, createContext, useContext, useCallback } from 'react';
 import { backendURL } from '../../constants';
 import { ApiResponse } from '../utils/ApiResponse';
+import { ApiError } from '../utils/ApiError';
 
 const AuthContext = createContext();
 
@@ -18,7 +19,7 @@ function AuthProvider({ children })
         } 
         catch (error) 
         {
-            console.log(error);
+            console.log(ApiError(error).message);
         }
     },[]);
 
