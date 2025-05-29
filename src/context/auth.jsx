@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useState, useEffect, createContext, useContext, useCallback } from 'react';
-import { backendURL } from '../../constants';
+import { axiosOptions, backendURL } from '../../constants';
 import { ApiResponse } from '../utils/ApiResponse';
 import { ApiError } from '../utils/ApiError';
 
@@ -12,7 +12,7 @@ function AuthProvider({ children })
     const userLogin = useCallback(async (user, action) => {
         try 
         {
-            const response = await axios.post(`${backendURL}/user/login`, user);
+            const response = await axios.post(`${backendURL}/user/login`, user, axiosOptions);
             const { message, data, success } = ApiResponse(response);
             console.log("The message is: ", message);
             action.resetForm();
