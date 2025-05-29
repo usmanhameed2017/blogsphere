@@ -3,6 +3,7 @@ import { useState, useEffect, createContext, useContext, useCallback } from 'rea
 import { axiosOptions, backendURL } from '../../constants';
 import { ApiResponse } from '../utils/ApiResponse';
 import { ApiError } from '../utils/ApiError';
+import { useNavigate } from 'react-router-dom'
 
 const AuthContext = createContext();
 
@@ -11,6 +12,25 @@ function AuthProvider({ children })
     const [isLoading, setLoading] = useState(false); // Loader
     const [user, setUser] = useState(null); // User payload
     const [isLoggedIn, setLoggedIn] = useState(null); // Login flag
+
+    const navigate = useNavigate();
+
+    // Signup
+    const userSignup = useCallback(async (user, action) => {
+        try 
+        {
+            setLoading(true);
+            const response = await axios.post(`${backendURL}/user/signup`, user, { ...axiosOptions, headers:{ "Content-Type":"multipart/form-data" } });
+            action.resetForm();
+            setLoading(false);
+            alert(ApiResponse(response).message);
+        } 
+        catch(error) 
+        {
+            setLoading(false);
+            alert(ApiError(error).message);
+        }
+    },[]);    
 
     // Login
     const userLogin = useCallback(async (user, action) => {
@@ -25,22 +45,23 @@ function AuthProvider({ children })
 
             action.resetForm();
             alert(message);
+            navigate('/');
         } 
         catch (error) 
         {
+            setLoading(false);
             alert(ApiError(error).message);
         }
     },[]);
 
-    // Signup
-    const userSignup = useCallback(async (user, action) => {
+    // Logout
+    const userLogout = useCallback(async () => {
         try 
         {
-            setLoading(true);
-            const response = await axios.post(`${backendURL}/user/signup`, user, { ...axiosOptions, headers:{ "Content-Type":"multipart/form-data" } });
-            action.resetForm();
-            setLoading(false);
-            alert(ApiResponse(response).message);
+            await axios.get(`${backendURL}/user/logout`, axiosOptions);
+            setUser(null);
+            setLoggedIn(false);
+            navigate("/");
         } 
         catch(error) 
         {
@@ -48,9 +69,28 @@ function AuthProvider({ children })
         }
     },[]);
 
+    // Verify Access Token
+    const verifyAccessToken = useCallback(async () => {
+        try 
+        {
+            const response = await axios.get(`${backendURL}/user/verifyAccessToken`, axiosOptions);
+            const { data, success } = ApiResponse(response);
+            setUser(data); // Plain user object
+            setLoggedIn(success);
+        } 
+        catch (error) 
+        {
+            setUser(null);
+            setLoggedIn(false);
+        }
+    },[]);
+
+    useEffect(() => {
+        verifyAccessToken();
+    },[]);
 
     return(
-        <AuthContext.Provider value={{ userSignup, userLogin, isLoading, setLoading }}>
+        <AuthContext.Provider value={{ userSignup, userLogin, userLogout, isLoading, setLoading, isLoggedIn, setLoggedIn, user, setUser }}>
             { children }
         </AuthContext.Provider>
     );
