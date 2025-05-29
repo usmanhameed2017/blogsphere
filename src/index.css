@@ -422,8 +422,8 @@ a {
   height: 100vh;
   margin: 0;
   padding: 0;
-  overflow-x: hidden; /* Remove horizontal scroll */
-  flex-wrap: nowrap; /* default no wrap */
+  overflow-x: hidden; 
+  flex-wrap: nowrap;
 }
 
 .contact-left,

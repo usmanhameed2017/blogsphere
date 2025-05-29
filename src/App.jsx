@@ -7,6 +7,7 @@ import Footer from './components/footer';
 import Contact from './pages/Contact';
 import Login from './pages/Login';
 import AuthProvider from './context/auth';
+import Blogs from './pages/Blogs';
 
 
 function App() 
@@ -19,6 +20,7 @@ function App()
           <Route path='/' element={ <Home /> } />
           <Route path='/about' element={ <About /> } />
           <Route path='/contact' element={ <Contact /> } />
+          <Route path='/blogs' element={ <Blogs /> } />
           <Route path='/login' element={ <Login /> } />
         </Routes>
           
