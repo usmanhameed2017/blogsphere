@@ -3,7 +3,7 @@ import { Tabs, Tab, Button, Alert } from "react-bootstrap";
 import { Form, Field, ErrorMessage } from 'formik';
 import FormBS from "../components/form";
 import { loginInitialValues, signupInitialValues } from "../schema/user";
-import { loginValidation } from "../validation/user";
+import { loginValidation, signupValidation } from "../validation/user";
 import { useAuth } from "../context/auth";
 
 function Login() 
@@ -51,7 +51,7 @@ function Login()
 
             {/* Signup */}
             <Tab eventKey="Signup" title="Signup">
-                <FormBS initialValues={signupInitialValues} validationSchema={loginValidation} handlerFunction={userLogin}>
+                <FormBS initialValues={signupInitialValues} validationSchema={signupValidation} handlerFunction={userLogin}>
                 {
                     ({ setFieldValue }) => (
                         <Form>
