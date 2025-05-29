@@ -8,7 +8,7 @@ import { useAuth } from "../context/auth";
 
 function Login() 
 {
-    const { userLogin } = useAuth();
+    const { userSignup, userLogin, isLoading } = useAuth();
     return (
         <div
         style={{
@@ -44,14 +44,14 @@ function Login()
                             <span className="text-danger"> <ErrorMessage name="password" /> </span>
                         </div>   
 
-                        <Button type="submit" className="custom-btn w-100 mt-3"> SIGN IN </Button>                         
+                        <Button type="submit" className="custom-btn w-100 mt-3" disabled={isLoading}> SIGN IN </Button>                         
                     </Form>
                 </FormBS>    
             </Tab>
 
             {/* Signup */}
             <Tab eventKey="Signup" title="Signup">
-                <FormBS initialValues={signupInitialValues} validationSchema={signupValidation} handlerFunction={userLogin}>
+                <FormBS initialValues={signupInitialValues} validationSchema={signupValidation} handlerFunction={userSignup}>
                 {
                     ({ setFieldValue }) => (
                         <Form>
@@ -123,7 +123,7 @@ function Login()
                                 <span className="text-danger"> <ErrorMessage name="profile_image" /> </span>
                             </div>                                        
 
-                            <Button type="submit" className="custom-btn w-100 mt-3"> SIGN UP </Button>                         
+                            <Button type="submit" className="custom-btn w-100 mt-3" disabled={isLoading}> SIGN UP </Button>                         
                         </Form>                        
                     )
                 }
