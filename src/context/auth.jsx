@@ -42,6 +42,7 @@ function AuthProvider({ children })
             setUser(data.user);
             setLoggedIn(success);
             setLoading(false);
+            localStorage.setItem("user", JSON.stringify(data.user));
 
             action.resetForm();
             alert(message);
@@ -61,6 +62,7 @@ function AuthProvider({ children })
             await axios.get(`${backendURL}/user/logout`, axiosOptions);
             setUser(null);
             setLoggedIn(false);
+            localStorage.removeItem("user");
             navigate("/");
         } 
         catch(error) 
@@ -77,11 +79,13 @@ function AuthProvider({ children })
             const { data, success } = ApiResponse(response);
             setUser(data); // Plain user object
             setLoggedIn(success);
+            localStorage.setItem("user", JSON.stringify(data));
         } 
         catch (error) 
         {
             setUser(null);
             setLoggedIn(false);
+            localStorage.removeItem("user");
         }
     },[]);
 

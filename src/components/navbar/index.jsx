@@ -3,12 +3,14 @@ import { Container, Row, Col, Navbar, Nav, Dropdown } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import { FaLock, FaChevronDown } from "react-icons/fa"; // Down arrow icon
 import { useAuth } from '../../context/auth';
+import { getUser } from '../../../constants';
 
 function NavbarBS() {
-    const { user, isLoggedIn, userLogout } = useAuth();
+    const { userLogout } = useAuth();
     const [showDropdown, setShowDropdown] = useState(false);
 
     const toggleDropdown = () => setShowDropdown(!showDropdown);
+    const user = getUser();
 
     return (
         <Container fluid>
@@ -27,7 +29,7 @@ function NavbarBS() {
                                     <NavLink to={`/about`}> About </NavLink>
                                     <NavLink to={`/contact`}> Contact </NavLink>
                                     {
-                                        isLoggedIn && (
+                                        user && (
                                             <NavLink to={`/blogs`}> Blogs </NavLink>
                                         )
                                     }
@@ -36,10 +38,10 @@ function NavbarBS() {
 
                                 <Navbar.Text>
                                     {
-                                        isLoggedIn ? (
+                                        user ? (
                                             <div className="user-dropdown" onClick={toggleDropdown}>
-                                                <img src={user?.profile_image || '/public/default-avatar.webp'} alt="Profile" className="profile-img" />
-                                                <span className="user-name">{user?.fname}</span>
+                                                <img src={ user?.profile_image || '/public/default-avatar.webp' } alt="Profile" className="profile-img" />
+                                                <span className="user-name">{ user?.fname }</span>
                                                 <FaChevronDown className="dropdown-icon" />
                                                 {
                                                     showDropdown && (
