@@ -93,6 +93,14 @@ a {
   color: #ff6f61;
 }
 
+.superHeading{
+  font-size: 3rem;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  color: #ff6f61;
+  animation: fadeInUp 1s ease-in-out;
+}
+
 .home-hero p {
   font-size: 1.2rem;
   color: #cccccc;
@@ -558,4 +566,24 @@ a {
 .dropdown-menu-custom a:hover {
   color: #00c2cb;
   text-decoration: underline;
+}
+
+
+/* Comment section */
+.comment-section {
+  border: 3px #00c2cb solid;
+  height: 500px;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 12px;
+  overflow-y: auto;
+}
+
+.blog-comment{
+  padding: 8px;
+  margin: 10px;
+  border: 1px #2a2b33 solid;
+  border-radius: 20px;
+  background-color: #2a2b33;
+    width: auto;
 }
