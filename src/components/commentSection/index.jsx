@@ -1,9 +1,11 @@
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { getTime } from '../../utils/getTime';
+import { useNavigate } from 'react-router-dom';
 
 function CommentSection({ comments }) 
 {
+    const navigate = useNavigate();
     console.log("Comments", comments)
     return (
         <div className='comment-section'>
@@ -22,7 +24,7 @@ function CommentSection({ comments })
                                     width={30} /> 
                                 </span> &nbsp;
 
-                                <strong> { comment?.commentedBy?.name }:&nbsp;</strong> 
+                                <strong className='commentProfile' onClick={ () => navigate(`/user/${comment?.commentedBy?._id}`) }> { comment?.commentedBy?.name }:&nbsp;</strong> 
                                 <span> { comment.text } </span> <small className='text-secondary'> { getTime(comment?.createdAt) } </small>
                             </Col>
                         </Row>                        

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchSingleBlogs } from '../api/blogs';
 import { Container, Row, Col } from 'react-bootstrap';
-import moment from 'moment';
 import { getTime } from '../utils/getTime';
 import CommentSection from '../components/commentSection';
 
@@ -30,6 +29,21 @@ function ViewBlog()
                         </section>
                     </Col>
                 </Row>
+
+                <div className='contentImages'>
+                {
+                    blog?.images && blog?.images?.length > 0 && (
+                        blog?.images?.map(image => (
+                            <img key={image}
+                            src={image} 
+                            alt={image} 
+                            height={200} 
+                            width={200}
+                            className='contentImage' />
+                        ))
+                    )
+                }
+                </div>
                 <hr />
 
                 {/* Created By */}

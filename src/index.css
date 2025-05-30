@@ -579,11 +579,29 @@ a {
   overflow-y: auto;
 }
 
-.blog-comment{
+.blog-comment {
   padding: 8px;
   margin: 10px;
   border: 1px #2a2b33 solid;
   border-radius: 20px;
   background-color: #2a2b33;
-    width: auto;
+  word-wrap: break-word; /* Long words break */
+  overflow-wrap: break-word; 
+}
+
+.commentProfile:hover{
+  cursor: pointer;
+  color: #00c2cb;
+}
+
+.contentImages{
+  display: flex;
+  gap: 10px;
+  justify-content: center; 
+  flex-wrap: wrap; 
+}
+
+.contentImage{
+  border-radius: 20px;
+  margin-right: 10px;
 }
