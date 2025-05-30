@@ -19,7 +19,7 @@ function NavbarBS() {
                     <Navbar bg='dark' variant='dark' expand='sm' fixed='top' style={{ backgroundColor:'#1e1f26' }}>
                         <Container fluid>
                             <Navbar.Brand>
-                                <img src='logo.png' height={40} width={40} className='align-top rounded-circle' /> &nbsp;
+                                <img src='/public/logo.png' height={40} width={40} className='align-top rounded-circle' /> &nbsp;
                             </Navbar.Brand>
 
                             <Navbar.Toggle aria-controls='my-nav' />

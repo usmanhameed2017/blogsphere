@@ -4,6 +4,7 @@ import CardBS from '../components/card';
 import { fetchRecentBlogs } from '../api/blogs';
 import About from './About';
 import Contact from './Contact';
+import { Col, Container, Row } from 'react-bootstrap';
 
 function Home() 
 {
@@ -27,28 +28,33 @@ function Home()
                 Top Recent Blogs
             </div>
 
-            {/* Blog cards container */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-                {
-                    blogs && blogs?.length > 0 ? blogs?.map(blog => (
-                        <CardBS 
-                        key={blog._id}
-                        coverImage={blog.coverImage}
-                        title={blog.title}
-                        description={blog.description}
-                        likes={blog.likes}
-                        totalLikes={blog.totalLikes}
-                        comments={blog.comments}
-                        totalComments={blog.totalComments}
-                        authorImage={blog.createdBy.profile_image}
-                        authorName={blog.createdBy.name} /> 
-                    ))
-                    : 
-                    <h2 style={{ textAlign: 'center', width: '100%', marginTop: '2rem' }}>
-                        No Blogs Found.
-                    </h2>
-                }
-            </div>
+            {/* Container For Blog Cards */}
+            <Container className="mt-4">
+                {/* Blog Cards Row */}
+                <Row>
+                    {
+                        blogs && blogs?.length > 0 ? blogs?.map(blog => (
+                            <Col key={blog._id} xs={12} sm={6} md={4} lg={3} className="d-flex justify-content-center mb-4">
+                                <CardBS 
+                                    _id={blog._id}
+                                    coverImage={blog.coverImage}
+                                    title={blog.title}
+                                    description={blog.description}
+                                    likes={blog.likes}
+                                    totalLikes={blog.totalLikes}
+                                    comments={blog.comments}
+                                    totalComments={blog.totalComments}
+                                    authorImage={blog.createdBy.profile_image}
+                                    authorName={blog.createdBy.name} />
+                            </Col>
+                        )) : (
+                            <Col>
+                                <h2 className="text-center mt-4">No Blogs Found.</h2>
+                            </Col>
+                        )
+                    }
+                </Row>
+            </Container>
 
             <About />  
 

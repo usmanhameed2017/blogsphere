@@ -1,5 +1,5 @@
 import axios from "axios";
-import { backendURL } from "../../constants";
+import { axiosOptions, backendURL } from "../../constants";
 import { ApiResponse } from "../utils/ApiResponse";
 import { ApiError } from "../utils/ApiError";
 
@@ -7,7 +7,7 @@ import { ApiError } from "../utils/ApiError";
 export const fetchAllBlogs = async () => {
     try 
     {
-        const response = await axios.get(`${backendURL}/blog`);
+        const response = await axios.get(`${backendURL}/blog`, axiosOptions);
         return ApiResponse(response).data;
     } 
     catch (error) 
@@ -20,7 +20,20 @@ export const fetchAllBlogs = async () => {
 export const fetchRecentBlogs = async () => {
     try 
     {
-        const response = await axios.get(`${backendURL}/blog/recentBlogs`);
+        const response = await axios.get(`${backendURL}/blog/recentBlogs`, axiosOptions);
+        return ApiResponse(response).data;
+    } 
+    catch (error) 
+    {
+        return ApiError(error);
+    }
+};
+
+// Fetch signle blog
+export const fetchSingleBlogs = async (id) => {
+    try 
+    {
+        const response = await axios.get(`${backendURL}/blog/${id}`, axiosOptions);
         return ApiResponse(response).data;
     } 
     catch (error) 

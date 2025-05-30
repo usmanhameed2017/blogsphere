@@ -8,6 +8,7 @@ import Contact from './pages/Contact';
 import Login from './pages/Login';
 import AuthProvider from './context/auth';
 import Blogs from './pages/Blogs';
+import ViewBlog from './pages/ViewBlog';
 
 
 function App() 
@@ -20,7 +21,10 @@ function App()
           <Route path='/' element={ <Home /> } />
           <Route path='/about' element={ <About /> } />
           <Route path='/contact' element={ <Contact /> } />
+
           <Route path='/blogs' element={ <Blogs /> } />
+          <Route path='/blogs/:id' element={ <ViewBlog /> } />
+
           <Route path='/login' element={ <Login /> } />
         </Routes>
           

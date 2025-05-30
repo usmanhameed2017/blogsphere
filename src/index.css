@@ -100,7 +100,7 @@ a {
   margin: auto;
 }
 
-.home-hero button {
+.home-hero button, .themeBtn {
   margin-top: 2rem;
   padding: 0.7rem 1.5rem;
   background-color: #3a506b; /* Dark bluish button */
@@ -114,6 +114,12 @@ a {
 }
 
 .home-hero button:hover {
+  background-color: #00c2cb; /* Cyan highlight on hover */
+  color: #1e1f26;
+  box-shadow: 0 6px 15px rgba(0,194,203,0.6);
+}
+
+.themeBtn:hover {
   background-color: #00c2cb; /* Cyan highlight on hover */
   color: #1e1f26;
   box-shadow: 0 6px 15px rgba(0,194,203,0.6);

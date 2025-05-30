@@ -1,9 +1,11 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-function CardBS({ coverImage, title, description, totalLikes, totalComments, authorImage, authorName }) 
+function CardBS({ _id, coverImage, title, description, totalLikes, totalComments, authorImage, authorName }) 
 {
+    const navigate = useNavigate();
     return (
-        <div className="blog-card">
+        <div className="blog-card" onClick={ () => navigate(`/blogs/${_id}`) }>
             {/* Image */}
             <div className="card-image">
                 <img src={coverImage} alt={title} />
@@ -12,12 +14,12 @@ function CardBS({ coverImage, title, description, totalLikes, totalComments, aut
             {/* Content */}
             <div className="card-content">
                 <h2>{title}</h2>
-                <p>{description}</p>
+                <p>{description.substring(0, 50)} ...</p>
             </div>
 
             {/* Footer */}
             <div className="card-footer">
-                <div className="meta">
+                <div className="meta" style={{ whiteSpace:'nowrap' }}>
                     <span>👍 {totalLikes}</span>
                     <span>💬 {totalComments}</span>
                 </div>
