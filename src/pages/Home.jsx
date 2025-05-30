@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Hero from '../components/hero';
 import CardBS from '../components/card';
-import { fetchAllBlogs } from '../api/blogs';
+import { fetchRecentBlogs } from '../api/blogs';
 import About from './About';
 import Contact from './Contact';
 
@@ -10,15 +10,12 @@ function Home()
     const [blogs, setBlogs] = useState(null);
 
     useEffect(() => {
-        fetchAllBlogs()
-        .then(response => {
-            setBlogs(response.data);
-            console.log(response);
-        })
+        fetchRecentBlogs()
+        .then(response => setBlogs(response))
         .catch(error => console.log(error));
     },[]);
 
-    console.log("Blogs", blogs);
+    console.log("Recent Blogs:", blogs);
     
     return (
         <div>
@@ -33,7 +30,7 @@ function Home()
             {/* Blog cards container */}
             <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
                 {
-                    blogs?.docs && blogs?.docs?.length > 0 ? blogs?.docs?.map(blog => (
+                    blogs && blogs?.length > 0 ? blogs?.map(blog => (
                         <CardBS 
                         key={blog._id}
                         coverImage={blog.coverImage}

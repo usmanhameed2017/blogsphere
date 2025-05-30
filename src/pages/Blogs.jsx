@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { fetchAllBlogs } from '../api/blogs';
+import CardBS from '../components/card';
 
 function Blogs() 
 {
+    const [blogs, setBlogs] = useState();
+
+    useEffect(() => {
+        fetchAllBlogs()
+        .then(response => setBlogs(response))
+        .catch(error => console.log(error.message))
+    },[]);
+    console.log("All Blogs:", blogs);
+
     return (
         <div className="blog-container">
             {/* Hero Section */}
@@ -17,6 +28,29 @@ function Blogs()
 
             {/* Divider */}
             <div className="section-divider">Explore More</div>
+
+            {/* Blog cards container */}
+            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+                {
+                    blogs?.docs && blogs?.docs?.length > 0 ? blogs?.docs?.map(blog => (
+                        <CardBS 
+                        key={blog._id}
+                        coverImage={blog.coverImage}
+                        title={blog.title}
+                        description={blog.description}
+                        likes={blog.likes}
+                        totalLikes={blog.totalLikes}
+                        comments={blog.comments}
+                        totalComments={blog.totalComments}
+                        authorImage={blog.createdBy.profile_image}
+                        authorName={blog.createdBy.name} /> 
+                    ))
+                    : 
+                    <h2 style={{ textAlign: 'center', width: '100%', marginTop: '2rem' }}>
+                        No Blogs Found.
+                    </h2>
+                }
+            </div>            
         </div>
     );
 }
