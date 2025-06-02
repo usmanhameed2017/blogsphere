@@ -27,11 +27,11 @@ function ViewBlog()
             const response = await axios.post(`${backendURL}/comment/blog`, { text:text, blogID:id }, axiosOptions);
             setReloadComments((prev) => prev + 1);
             setText('');
-            console.log(ApiResponse(response));
+            // alert(ApiResponse(response).message);
         } 
         catch (error) 
         {
-            console.log(ApiError(error));
+            alert(ApiError(error).message);
         }
     },[text]);
 
@@ -130,6 +130,7 @@ function ViewBlog()
                             <FaCommentDots size={24} />
                             &nbsp; <strong> { blog?.totalComments } comments </strong> 
                         </span>
+                        <hr />
                     </Col>
                 </Row>
 
@@ -146,7 +147,7 @@ function ViewBlog()
                     <Col>
                     {
                         blog?.comments && blog?.comments.length > 0 ?
-                        <CommentSection comments={blog?.comments} />
+                        <CommentSection comments={blog?.comments} setReloadComments={setReloadComments} />
                         :
                         <section className='home-hero'>
                             <h2> No Comments </h2>

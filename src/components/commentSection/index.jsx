@@ -1,37 +1,69 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Col, Row, Dropdown, Button, Form } from 'react-bootstrap';
 import { getTime } from '../../utils/getTime';
 import { useNavigate } from 'react-router-dom';
 import { FaEllipsisV, FaEdit, FaTrash } from 'react-icons/fa';
+import axios from 'axios';
+import { axiosOptions, backendURL } from '../../../constants';
+import { ApiResponse } from '../../utils/ApiResponse';
+import { ApiError } from '../../utils/ApiError';
 
-function CommentSection({ comments }) {
+function CommentSection({ comments, setReloadComments }) 
+{
     const navigate = useNavigate();
     const [showDropdownId, setShowDropdownId] = useState(null);
     const [editingCommentId, setEditingCommentId] = useState(null); // Which comment is being edited
     const [editedText, setEditedText] = useState(''); // Store edited text
 
-    const toggleDropdown = (commentId) => {
-        setShowDropdownId(prev => (prev === commentId ? null : commentId));
-    };
+    // Toggle dropdown
+    const toggleDropdown = useCallback((commentId) => {
+        setShowDropdownId(prev => (prev === commentId ? null : commentId))
+    },[]);
 
     // Open edit box
     const handleEditClick = useCallback((comment) => {
         setEditingCommentId(comment._id);
-        setEditedText(comment.text); // Set current text as initial value
-        setShowDropdownId(null); // Close dropdown
+        setEditedText(comment.text);
+        setShowDropdownId(null);
     },[]);
 
     // Save comment
-    const handleSaveEdit = useCallback((commentId) => {
-        alert(`Saving edited comment: ${commentId}\nNew text: ${editedText}`);
-        setEditingCommentId(null);
-        setEditedText('');   
+    const saveEdit = useCallback(async (commentId) => {
+        if(!commentId) return null;
+        try 
+        {
+            const response = await axios.patch(`${backendURL}/comment/blog/${commentId}`, { text:editedText }, axiosOptions);
+            setReloadComments(prev => prev + 1);
+            // alert(ApiResponse(response).message);
+            setEditingCommentId(null);
+            setEditedText('');
+        } 
+        catch(error) 
+        {
+            alert(ApiError(error));
+        }
     },[editedText]);
 
     // Cancel editing
-    const handleCancelEdit = useCallback(() => {
+    const cancelEdit = useCallback(() => {
         setEditingCommentId(null);
         setEditedText('');
+    },[]);
+
+    // Delete comment
+    const deleteComment = useCallback(async (commentId) => {
+        if(!commentId) return null;
+        try 
+        {
+            const response = await axios.delete(`${backendURL}/comment/blog/${commentId}`, axiosOptions);
+            // alert(ApiResponse(response).message);
+            setReloadComments(prev => prev + 1);
+            setShowDropdownId(null);
+        } 
+        catch (error) 
+        {
+            alert(ApiError(error).message);
+        }
     },[]);
 
     return (
@@ -75,12 +107,12 @@ function CommentSection({ comments }) {
                                                     }} >
 
                                                         {/* Edit */}
-                                                        <Dropdown.Item onClick={() => handleEditClick(comment)}>
+                                                        <Dropdown.Item onClick={ () => handleEditClick(comment)}>
                                                             <FaEdit size={20} /> Edit
                                                         </Dropdown.Item>
 
                                                         {/* Delete */}
-                                                        <Dropdown.Item onClick={() => alert(`Delete comment: ${comment?._id}`)}>
+                                                        <Dropdown.Item onClick={ () => deleteComment(comment._id) }>
                                                             <FaTrash size={20} /> Delete
                                                         </Dropdown.Item>
                                                     </Dropdown.Menu>
@@ -100,12 +132,11 @@ function CommentSection({ comments }) {
                                                         placeholder='Modify Comment'
                                                         rows={2}
                                                         value={editedText}
-                                                        onChange={(e) => setEditedText(e.target.value)}
-                                                    > </textarea>
+                                                        onChange={ (e) => setEditedText(e.target.value) }> </textarea>
 
                                                     <div className='mt-1'>
-                                                        <Button size='sm' variant='success' onClick={() => handleSaveEdit(comment._id)}>Save</Button>{' '}
-                                                        <Button size='sm' variant='secondary' onClick={handleCancelEdit}>Cancel</Button>
+                                                        <Button size='sm' variant='success' onClick={() => saveEdit(comment._id)}>Save</Button>{' '}
+                                                        <Button size='sm' variant='secondary' onClick={cancelEdit}>Cancel</Button>
                                                     </div>
                                                 </>
                                             ) 
