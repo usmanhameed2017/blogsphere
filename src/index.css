@@ -577,10 +577,10 @@ a {
 /* Comment section */
 .comment-section {
   border: 3px #00c2cb solid;
-  height: 500px;
   margin-top: 10px;
   padding: 10px;
   border-radius: 12px;
+  max-height: 700px;
   overflow-y: auto;
 }
 

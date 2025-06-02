@@ -1,21 +1,44 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchSingleBlog } from '../api/blogs';
 import { Container, Row, Col } from 'react-bootstrap';
 import { getTime } from '../utils/getTime';
 import CommentSection from '../components/commentSection';
+import { ApiResponse } from '../utils/ApiResponse';
+import { ApiError } from '../utils/ApiError';
+import { axiosOptions, backendURL } from '../../constants';
+import axios from 'axios';
+import { FaThumbsUp, FaRegThumbsUp, FaCommentDots } from 'react-icons/fa';
 
 function ViewBlog() 
 {
     const { id } = useParams();
     const [blog, setBlog] = useState(null);
+    const [text, setText] = useState('');
+    const [reloadComments, setReloadComments] = useState(0);
+
+    // Add comment on blog
+    const addCommentOnBlog = useCallback(async (e) => {
+        e.preventDefault();
+        try 
+        {
+            const response = await axios.post(`${backendURL}/comment/blog`, { text:text, blogID:id }, axiosOptions);
+            setReloadComments((prev) => prev + 1);
+            setText('');
+            console.log(ApiResponse(response));
+        } 
+        catch (error) 
+        {
+            console.log(ApiError(error));
+        }
+    },[text]);
 
     useEffect(() => {
         fetchSingleBlog(id)
         .then(response => setBlog(response))
         .catch(error => console.log(error));
-    },[]);
-    console.log(blog);
+    },[reloadComments]);
+    // console.log(blog);
 
     return (
         <div className="blog-container">
@@ -69,14 +92,30 @@ function ViewBlog()
                 {/* Total likes */}
                 <Row>
                     <Col>
-                        <span> <strong> 👍 { blog?.totalLikes }  likes </strong> </span>
+                        <span> 
+                        {/* Conditional rendering for likes */}
+                        { 
+                            blog?.isLiked ? 
+                            (
+                                <FaThumbsUp style={{ color: '#00c2cb', cursor: 'pointer' }} size={24} onClick={ () => alert('ok') } />
+                            ) 
+                            : 
+                            (
+                                <FaRegThumbsUp style={{ color: 'gray', cursor: 'pointer' }} size={24} onClick={ () => alert('ok') } />
+                            )
+                        }
+                        &nbsp; <strong> { blog?.totalLikes } likes </strong>
+                        </span>
                     </Col>
                 </Row>
 
                 {/* Total comments */}
-                <Row>
+                <Row className='mt-1'>
                     <Col>
-                        <span> <strong> 💬 { blog?.totalComments }  comments </strong> </span>
+                        <span>
+                            <FaCommentDots size={24} />
+                            &nbsp; <strong> { blog?.totalComments } comments </strong> 
+                        </span>
                     </Col>
                 </Row>
 
@@ -102,8 +141,20 @@ function ViewBlog()
                     </Col>
                 </Row>
 
+                {/* Comment Box */}
+                <Row className='mt-3'>
+                    <Col md="4" sm="12" xs="12" lg="4">
+                        <form method="post" onSubmit={addCommentOnBlog}>
+                            <div className="form-group mb-3">
+                                <input type="text" name="comment" className='form-control' placeholder='Enter Comment'
+                                value={text} onChange={ (e) => setText(e.target.value) } required />
+                            </div>
+
+                            <button className="custom-btn btn btn-primary"> Add Comment </button>
+                        </form>
+                    </Col>
+                </Row>
                 <hr />
-                
             </Container>
         </div>
     );

@@ -37,4 +37,4 @@ function CommentSection({ comments })
     )
 }
 
-export default CommentSection;
+export default React.memo(CommentSection);
