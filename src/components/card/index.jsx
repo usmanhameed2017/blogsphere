@@ -22,8 +22,7 @@ function CardBS({ _id, coverImage, title, description, totalLikes, totalComments
 
             {/* Content */}
             <div className="card-content">
-                <h2>{title}</h2>
-                <p>{description.substring(0, 50)} ...</p>
+                <h4>{title}</h4>
             </div>
 
             {/* Footer */}

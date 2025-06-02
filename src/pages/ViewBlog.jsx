@@ -11,6 +11,7 @@ import axios from 'axios';
 import { FaThumbsUp, FaRegThumbsUp, FaCommentDots } from 'react-icons/fa';
 import { likeOnBlog } from '../api/like';
 
+
 function ViewBlog() 
 {
     const { id } = useParams();

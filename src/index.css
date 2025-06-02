@@ -576,7 +576,7 @@ a {
 
 /* Comment section */
 .comment-section {
-  border: 3px #00c2cb solid;
+  border: 10px #00c2cb ridge;
   margin-top: 10px;
   padding: 10px;
   border-radius: 12px;
@@ -609,4 +609,18 @@ a {
 .contentImage{
   border-radius: 20px;
   margin-right: 10px;
+}
+
+.dropdown-container {
+    position: relative;
+    display: inline-block;
+}
+
+.show-dropdown {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    z-index: 1000;
+    background-color: #96a5c4c2;
+    color: #00bcd4;
 }
