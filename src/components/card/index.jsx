@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getUser } from '../../../constants';
 
 function CardBS({ _id, coverImage, title, description, totalLikes, totalComments, authorImage, authorName }) 
 {
     const navigate = useNavigate();
+
+    // Redirect based on authorization
+    const redirectTo = useCallback((url) => {
+        const user = getUser();
+        if(!user) return navigate("/login");
+        return navigate(url);
+    },[]);    
+
     return (
-        <div className="blog-card" onClick={ () => navigate(`/blogs/${_id}`) }>
+        <div className="blog-card" onClick={ () => redirectTo(`/blogs/${_id}`) }>
             {/* Image */}
             <div className="card-image">
                 <img src={coverImage} alt={title} />

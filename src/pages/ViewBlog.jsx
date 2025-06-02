@@ -79,7 +79,7 @@ function ViewBlog()
                             <h5> 
                                 Published by: &nbsp;
                                 <img 
-                                src={ blog?.createdBy.profile_image } 
+                                src={ blog?.createdBy?.profile_image } 
                                 alt="profile_image" height={30} 
                                 width={30} 
                                 className='rounded-circle' /> &nbsp;  { blog?.createdBy?.name } 

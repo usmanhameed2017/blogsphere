@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import AuthProvider from './context/auth';
 import Blogs from './pages/Blogs';
 import ViewBlog from './pages/ViewBlog';
+import ProtectedRoute from './pages/ProtectedRoute';
 
 
 function App() 
@@ -22,8 +23,11 @@ function App()
           <Route path='/about' element={ <About /> } />
           <Route path='/contact' element={ <Contact /> } />
 
-          <Route path='/blogs' element={ <Blogs /> } />
-          <Route path='/blogs/:id' element={ <ViewBlog /> } />
+          {/* Protected Route */}
+          <Route element={ <ProtectedRoute /> } >
+            <Route path='/blogs' element={ <Blogs /> } />
+            <Route path='/blogs/:id' element={ <ViewBlog /> } />
+          </Route>
 
           <Route path='/login' element={ <Login /> } />
         </Routes>
