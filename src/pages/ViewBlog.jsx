@@ -9,6 +9,7 @@ import { ApiError } from '../utils/ApiError';
 import { axiosOptions, backendURL } from '../../constants';
 import axios from 'axios';
 import { FaThumbsUp, FaRegThumbsUp, FaCommentDots } from 'react-icons/fa';
+import { likeOnBlog } from '../api/like';
 
 function ViewBlog() 
 {
@@ -37,7 +38,7 @@ function ViewBlog()
         fetchSingleBlog(id)
         .then(response => setBlog(response))
         .catch(error => console.log(error));
-    },[reloadComments]);
+    },[reloadComments, likeOnBlog]);
     // console.log(blog);
 
     return (
@@ -97,11 +98,23 @@ function ViewBlog()
                         { 
                             blog?.isLiked ? 
                             (
-                                <FaThumbsUp style={{ color: '#00c2cb', cursor: 'pointer' }} size={24} onClick={ () => alert('ok') } />
+                                <FaThumbsUp 
+                                style={{ color: '#00c2cb', cursor: 'pointer' }} 
+                                size={24} 
+                                title='Dislike'
+                                onClick={ () => likeOnBlog(id)
+                                    .then(() => setReloadComments(prev => prev + 1)) 
+                                    .catch(error => console.log(error)) } />
                             ) 
                             : 
                             (
-                                <FaRegThumbsUp style={{ color: 'gray', cursor: 'pointer' }} size={24} onClick={ () => alert('ok') } />
+                                <FaRegThumbsUp 
+                                style={{ color: 'gray', cursor: 'pointer' }} 
+                                size={24} 
+                                title='Like'
+                                onClick={ () => likeOnBlog(id)
+                                    .then(() => setReloadComments(prev => prev + 1)) 
+                                    .catch(error => console.log(error)) } />
                             )
                         }
                         &nbsp; <strong> { blog?.totalLikes } likes </strong>
