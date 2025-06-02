@@ -10,6 +10,7 @@ import AuthProvider from './context/auth';
 import Blogs from './pages/Blogs';
 import ViewBlog from './pages/ViewBlog';
 import ProtectedRoute from './pages/ProtectedRoute';
+import Profile from './pages/user/Profile';
 
 
 function App() 
@@ -27,6 +28,7 @@ function App()
           <Route element={ <ProtectedRoute /> } >
             <Route path='/blogs' element={ <Blogs /> } />
             <Route path='/blogs/:id' element={ <ViewBlog /> } />
+            <Route path='/user/profile' element={ <Profile /> } />
           </Route>
 
           <Route path='/login' element={ <Login /> } />

@@ -34,7 +34,7 @@ function CommentSection({ comments, setReloadComments })
         {
             const response = await axios.patch(`${backendURL}/comment/blog/${commentId}`, { text:editedText }, axiosOptions);
             setReloadComments(prev => prev + 1);
-            // alert(ApiResponse(response).message);
+            alert(ApiResponse(response).message);
             setEditingCommentId(null);
             setEditedText('');
         } 
@@ -56,7 +56,7 @@ function CommentSection({ comments, setReloadComments })
         try 
         {
             const response = await axios.delete(`${backendURL}/comment/blog/${commentId}`, axiosOptions);
-            // alert(ApiResponse(response).message);
+            alert(ApiResponse(response).message);
             setReloadComments(prev => prev + 1);
             setShowDropdownId(null);
         } 

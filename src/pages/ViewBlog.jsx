@@ -27,7 +27,7 @@ function ViewBlog()
             const response = await axios.post(`${backendURL}/comment/blog`, { text:text, blogID:id }, axiosOptions);
             setReloadComments((prev) => prev + 1);
             setText('');
-            // alert(ApiResponse(response).message);
+            alert(ApiResponse(response).message);
         } 
         catch (error) 
         {
@@ -40,7 +40,7 @@ function ViewBlog()
         .then(response => setBlog(response))
         .catch(error => console.log(error));
     },[reloadComments, likeOnBlog]);
-    // console.log(blog);
+    console.log(blog);
 
     return (
         <div className="blog-container">

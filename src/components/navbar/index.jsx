@@ -46,7 +46,7 @@ function NavbarBS() {
                                                 {
                                                     showDropdown && (
                                                         <div className="dropdown-menu-custom">
-                                                            <NavLink to="/profile">Profile</NavLink>
+                                                            <NavLink to="/user/profile">Profile</NavLink>
                                                             <NavLink onClick={ userLogout }>Logout</NavLink>
                                                         </div>
                                                     )
