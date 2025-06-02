@@ -13,7 +13,7 @@ function CommentSection({ comments })
             {
                 comments?.map(comment => (
                     <div key={comment?._id} className='blog-comment'>
-                        <Row className='m-2 p-2'>
+                        <Row className='m-1 p-1'>
                             <Col>
                                 <span> 
                                     <img 
@@ -24,8 +24,9 @@ function CommentSection({ comments })
                                     width={30} /> 
                                 </span> &nbsp;
 
-                                <strong className='commentProfile' onClick={ () => navigate(`/user/${comment?.commentedBy?._id}`) }> { comment?.commentedBy?.name }:&nbsp;</strong> 
-                                <span> { comment.text } </span> <small className='text-secondary'> { getTime(comment?.createdAt) } </small>
+                                <strong className='commentProfile' onClick={ () => navigate(`/user/${comment?.commentedBy?._id}`) }> { comment?.commentedBy?.name } </strong> 
+                                <p style={{ marginLeft:"45px", marginTop:'5px' }}> { comment.text } </p> 
+                                <p className='text-secondary' style={{ marginLeft:"45px" }}> { getTime(comment?.createdAt) } </p>
                             </Col>
                         </Row>                        
                     </div>

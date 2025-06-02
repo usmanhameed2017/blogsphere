@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchSingleBlogs } from '../api/blogs';
+import { fetchSingleBlog } from '../api/blogs';
 import { Container, Row, Col } from 'react-bootstrap';
 import { getTime } from '../utils/getTime';
 import CommentSection from '../components/commentSection';
@@ -11,7 +11,7 @@ function ViewBlog()
     const [blog, setBlog] = useState(null);
 
     useEffect(() => {
-        fetchSingleBlogs(id)
+        fetchSingleBlog(id)
         .then(response => setBlog(response))
         .catch(error => console.log(error));
     },[]);
@@ -23,9 +23,11 @@ function ViewBlog()
                 <Row>
                     <Col>
                         {/* Hero Section */}
-                        <section className="home-hero" style={{ backgroundColor: '#1e1f26', color: 'white', padding: '4rem 2rem', textAlign: 'center' }}>
+                        <section className="home-hero" style={{ backgroundColor: '#1e1f26', color: 'white', padding: '4rem 2rem' }}>
                             <h1>{ blog?.title } </h1>
-                            <p> { blog?.description } </p>
+                        </section>
+                        <section>
+                            <p className='blog-para'> { blog?.description } </p>
                         </section>
                     </Col>
                 </Row>
@@ -37,8 +39,8 @@ function ViewBlog()
                             <img key={image}
                             src={image} 
                             alt={image} 
-                            height={200} 
-                            width={200}
+                            height={400} 
+                            width={400}
                             className='contentImage' />
                         ))
                     )
@@ -79,17 +81,28 @@ function ViewBlog()
                 </Row>
 
                 {/* Comment section */}
-                <div>
-                    <h1 className='superHeading text-center'> COMMENT SECTION </h1>
-                </div>
-                {
-                    blog?.comments && blog?.comments.length > 0 ?
-                    <CommentSection comments={blog?.comments} />
-                    :
-                    <section className='home-hero'>
-                        <h2> No Comments </h2>
-                    </section>
-                }
+                <Row>
+                    <Col>
+                        <div>
+                            <h1 className='superHeading text-center'> COMMENT SECTION </h1>
+                        </div>
+                    </Col>
+                </Row>
+
+                <Row>
+                    <Col>
+                    {
+                        blog?.comments && blog?.comments.length > 0 ?
+                        <CommentSection comments={blog?.comments} />
+                        :
+                        <section className='home-hero'>
+                            <h2> No Comments </h2>
+                        </section>
+                    }
+                    </Col>
+                </Row>
+
+                <hr />
                 
             </Container>
         </div>

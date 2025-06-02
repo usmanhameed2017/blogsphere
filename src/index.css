@@ -108,6 +108,11 @@ a {
   margin: auto;
 }
 
+.blog-para {
+  font-size: 1.2rem;
+  color: #cccccc;
+}
+
 .home-hero button, .themeBtn {
   margin-top: 2rem;
   padding: 0.7rem 1.5rem;
@@ -580,7 +585,7 @@ a {
 }
 
 .blog-comment {
-  padding: 8px;
+  padding: 4px;
   margin: 10px;
   border: 1px #2a2b33 solid;
   border-radius: 20px;

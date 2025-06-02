@@ -29,8 +29,8 @@ export const fetchRecentBlogs = async () => {
     }
 };
 
-// Fetch signle blog
-export const fetchSingleBlogs = async (id) => {
+// Fetch single blog
+export const fetchSingleBlog = async (id) => {
     try 
     {
         const response = await axios.get(`${backendURL}/blog/${id}`, axiosOptions);
