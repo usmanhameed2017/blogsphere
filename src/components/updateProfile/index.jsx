@@ -23,9 +23,7 @@ function UpdateProfile()
 
     return (
         <>
-            {/* <section className='home-hero'> */}
-                <h1 className='fw-bold superHeading text-center mb-5' style={{ marginTop:"100px" }}> UPDATE INFO </h1>
-            {/* </section> */}
+            <h1 className='fw-bold superHeading text-center mb-5' style={{ marginTop:"100px" }}> UPDATE INFO </h1>
             <FormBS initialValues={initialValues} validationSchema={updateUserValidation} handlerFunction={updateUserInfo}>
             {
                 ({ setFieldValue }) => (

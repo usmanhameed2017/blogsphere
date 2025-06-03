@@ -18,3 +18,17 @@ export const updateUserInfo = async (values) => {
         alert(ApiError(error).message);
     }
 };
+
+// Update user info
+export const updatePassword = async (values, action) => {
+    try 
+    {
+        const response = await axios.patch(`${backendURL}/user/changePassword`, values, axiosOptions);
+        action.resetForm();
+        alert(ApiResponse(response).message);
+    } 
+    catch (error) 
+    {
+        alert(ApiError(error).message);
+    }
+};

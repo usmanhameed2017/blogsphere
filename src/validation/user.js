@@ -90,3 +90,16 @@ export const updateUserValidation = Yup.object({
     .test('type', "Invalid image format! Only 'png', 'jpg', 'jpeg', 'webp' 'gif' are allowed", imageTypeChecker)
     .test('size', "Image size must not be larger than 5MB", imageSizeChecker)
 });
+
+export const updatePasswordValidation = Yup.object({
+    oldPassword:Yup.string()
+    .required('Old password is required'),
+
+    newPassword:Yup.string()
+    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/, "Enter strong password")
+    .required('New password is required'),
+
+    confirmPassword:Yup.string()
+    .oneOf([Yup.ref('newPassword'), null], "New password & confirm password must be identical")
+    .required('Confirm password is required'),
+});
