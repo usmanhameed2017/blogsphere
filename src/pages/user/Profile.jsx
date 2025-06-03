@@ -15,7 +15,6 @@ function Profile()
         .catch(error => console.log(error.message));
     },[]);
 
-    console.log("Blogs:", blogs);
     return (
         <>
             <UserProfile />

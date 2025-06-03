@@ -558,21 +558,24 @@ a {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
   padding: 10px 20px;
   z-index: 1000;
+  width: auto;
   animation: fadeInUp 0.3s ease-in-out;
 }
 
 .dropdown-menu-custom a {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   color: #fff;
   padding: 0.4rem 0;
   transition: color 0.3s;
+  text-decoration: none;
 }
 
 .dropdown-menu-custom a:hover {
   color: #00c2cb;
   text-decoration: underline;
 }
-
 
 /* Comment section */
 .comment-section {
