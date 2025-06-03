@@ -5,6 +5,7 @@ import FormBS from "../components/form";
 import { loginInitialValues, signupInitialValues } from "../schema/user";
 import { loginValidation, signupValidation } from "../validation/user";
 import { useAuth } from "../context/auth";
+import { Link } from "react-router-dom";
 
 function Login() 
 {
@@ -21,11 +22,7 @@ function Login()
             boxShadow: "0 4px 15px rgba(0, 194, 203, 0.5)",
         }} >
 
-        <Tabs
-        defaultActiveKey="Signin"
-        id="uncontrolled-tab-example"
-        className="mb-3">
-
+        <Tabs defaultActiveKey="Signin" id="uncontrolled-tab-example" className="mb-3">
             {/* Signin */}
             <Tab eventKey="Signin" title="Signin">
                 <FormBS initialValues={loginInitialValues} validationSchema={loginValidation} handlerFunction={userLogin}>
@@ -44,8 +41,15 @@ function Login()
                             <span className="text-danger"> <ErrorMessage name="password" /> </span>
                         </div>   
 
-                        <Button type="submit" className="custom-btn w-100 mt-3" disabled={isLoading}> SIGN IN </Button>                         
+                        {/* Forgot Password */}
+                        <div className="form-group">
+                            <Link className="text-info" style={{ cursor:"pointer" }} to='/security/forgotPassword'> Forgot password? </Link>
+                        </div>
+
+                        <Button type="submit" className="custom-btn w-100 mt-3" disabled={isLoading}> SIGN IN </Button>       
+                        <hr />                 
                     </Form>
+                    
                 </FormBS>    
             </Tab>
 

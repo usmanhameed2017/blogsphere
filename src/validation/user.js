@@ -91,10 +91,30 @@ export const updateUserValidation = Yup.object({
     .test('size', "Image size must not be larger than 5MB", imageSizeChecker)
 });
 
+// Update password validation
 export const updatePasswordValidation = Yup.object({
     oldPassword:Yup.string()
     .required('Old password is required'),
 
+    newPassword:Yup.string()
+    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/, "Enter strong password")
+    .required('New password is required'),
+
+    confirmPassword:Yup.string()
+    .oneOf([Yup.ref('newPassword'), null], "New password & confirm password must be identical")
+    .required('Confirm password is required'),
+});
+
+// Forgot password validation 
+export const forgotPasswordValidation = Yup.object({
+    email:Yup.string()
+    .lowercase()
+    .email('Invalid email')
+    .required("Email is required")
+});
+
+// Reset password validation
+export const resetPasswordValidation = Yup.object({
     newPassword:Yup.string()
     .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/, "Enter strong password")
     .required('New password is required'),

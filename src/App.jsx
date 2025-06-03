@@ -12,6 +12,8 @@ import ViewBlog from './pages/ViewBlog';
 import ProtectedRoute from './pages/ProtectedRoute';
 import Profile from './pages/user/Profile';
 import ProfileSettings from './pages/ProfileSettings';
+import ResetPassword from './pages/security/ResetPassword';
+import ForgotPassword from './pages/security/ForgotPassword';
 
 
 function App() 
@@ -34,6 +36,8 @@ function App()
           </Route>
 
           <Route path='/login' element={ <Login /> } />
+          <Route path='/security/ForgotPassword' element={ <ForgotPassword /> } />
+          <Route path='/security/verifyResetLink/:code' element={ <ResetPassword /> } />
         </Routes>
           
         {/* Closing Section */}
