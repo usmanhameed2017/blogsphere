@@ -604,14 +604,20 @@ a {
 
 .contentImages{
   display: flex;
-  gap: 10px;
+  gap: 20px;
   justify-content: center; 
   flex-wrap: wrap; 
 }
 
 .contentImage{
-  border-radius: 20px;
+  border-radius: 3px;
   margin-right: 10px;
+  box-shadow: 0 10px 25px rgba(0, 194, 203, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contentImage:hover{
+  box-shadow: 0 10px 25px rgba(0, 194, 203, 0.5);
 }
 
 .dropdown-container {
