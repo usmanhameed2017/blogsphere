@@ -56,3 +56,37 @@ export const signupValidation = Yup.object({
     .test('type', "Invalid image format! Only 'png', 'jpg', 'jpeg', 'webp' 'gif' are allowed", imageTypeChecker)
     .test('size', "Image size must not be larger than 5MB", imageSizeChecker)
 });
+
+// Update user validation
+export const updateUserValidation = Yup.object({
+    fname:Yup.string()
+    .min(3, "First name must be at least 3 characters long")
+    .max(12, "First name must not be longer than 12 characters")
+    .required("First name is required"),
+
+    lname:Yup.string()
+    .min(3, "Last name must be at least 3 characters long")
+    .max(12, "Last name must not be longer than 12 characters")
+    .required("Last name is required"),
+
+    age:Yup.number()
+    .min(18, "Age must be greater than or equal to 18")
+    .max(50, "Age must not be greater than 50")
+    .required("Age is required"),
+
+    gender:Yup.string()
+    .required("Gender is required"),
+
+    email:Yup.string()
+    .lowercase()
+    .email('Invalid email')
+    .required("Email is required"),
+
+    username:Yup.string()
+    .lowercase()
+    .required('Username is required'),
+    
+    profile_image:Yup.mixed()
+    .test('type', "Invalid image format! Only 'png', 'jpg', 'jpeg', 'webp' 'gif' are allowed", imageTypeChecker)
+    .test('size', "Image size must not be larger than 5MB", imageSizeChecker)
+});

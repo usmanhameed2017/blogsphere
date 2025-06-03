@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Navbar, Nav, Dropdown } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
-import { FaLock, FaChevronDown, FaUserCircle, FaSignOutAlt } from "react-icons/fa"; // Down arrow icon
+import { FaLock, FaChevronDown, FaUserCircle, FaSignOutAlt, FaCog } from "react-icons/fa";
 import { useAuth } from '../../context/auth';
 import { getUser } from '../../../constants';
 
@@ -47,6 +47,7 @@ function NavbarBS() {
                                                     showDropdown && (
                                                         <div className="dropdown-menu-custom">
                                                             <NavLink to="/user/profile"> <FaUserCircle /> Profile </NavLink>
+                                                            <NavLink to="/user/settings"> <FaCog /> Settings </NavLink>
                                                             <NavLink onClick={ userLogout }> <FaSignOutAlt /> Logout </NavLink>
                                                         </div>
                                                     )
