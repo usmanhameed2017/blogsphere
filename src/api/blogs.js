@@ -41,3 +41,16 @@ export const fetchSingleBlog = async (id) => {
         return ApiError(error);
     }
 };
+
+// Fetch my blogs
+export const fetchMyBlogs = async () => {
+    try 
+    {
+        const response = await axios.get(`${backendURL}/blog/myBlogs/`, axiosOptions);
+        return ApiResponse(response).data;
+    } 
+    catch (error) 
+    {
+        return ApiError(error);
+    }
+};
