@@ -9,7 +9,7 @@ const user = getUser();
 export const updateUserInfo = async (values) => {
     try 
     {
-        const response = await axios.put(`${backendURL}/user/${user._id}`, values, { ...axiosOptions, headers:{ "Content-Type":"multipart/form-data" } });
+        const response = await axios.put(`${backendURL}/user/${user?._id}`, values, { ...axiosOptions, headers:{ "Content-Type":"multipart/form-data" } });
         localStorage.setItem("user", JSON.stringify(ApiResponse(response).data)); // Keep UI in sync
         alert(ApiResponse(response).message);
     } 
