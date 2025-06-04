@@ -646,3 +646,43 @@ a {
 .profile-container{
   margin-top: 50px;
 }
+
+/* Googel login button */
+.google-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    color: #444;
+    border: 1px solid lightgray;
+    font-size: 16px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    transition: background-color 0.3s;
+    width: 100%;
+}
+
+.google-btn:hover {
+    box-shadow: 0 6px 15px rgba(0, 194, 203, 0.6);
+}
+
+.google-icon-wrapper {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.google-icon {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+}
+
+.btn-text {
+    margin: 0;
+    font-weight: 500;
+}

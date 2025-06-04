@@ -39,7 +39,7 @@ function ForgotPassword()
                                 {/* Email */}
                                 <div className="form-group">
                                     <label htmlFor="email"> Email </label>
-                                    <Field type='text' name='email' className='form-control' placeholder="Enter Email" />
+                                    <Field type='text' name='email' className='form-control' placeholder="Enter email" />
                                     <span className="text-danger"> <ErrorMessage name="email" /> </span>
                                 </div>   
 

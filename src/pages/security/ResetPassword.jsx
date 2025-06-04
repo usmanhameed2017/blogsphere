@@ -80,14 +80,14 @@ function ResetPassword()
                                 {/* New Password */}
                                 <div className="form-group">
                                     <label htmlFor="newPassword"> New Password </label>
-                                    <Field type='password' name='newPassword' className='form-control' placeholder="Enter Password" />
+                                    <Field type='password' name='newPassword' className='form-control' placeholder="Enter password" />
                                     <span className="text-danger"> <ErrorMessage name="newPassword" /> </span>
                                 </div>   
 
                                 {/* Confirm Password */}
                                 <div className="form-group">
                                     <label htmlFor="confirmPassword"> Confirm Password </label>
-                                    <Field type='password' name='confirmPassword' className='form-control' placeholder="Re-Enter Password" />
+                                    <Field type='password' name='confirmPassword' className='form-control' placeholder="Re-enter password" />
                                     <span className="text-danger"> <ErrorMessage name="confirmPassword" /> </span>
                                 </div> 
 

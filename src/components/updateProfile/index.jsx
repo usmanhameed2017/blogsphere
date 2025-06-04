@@ -31,29 +31,29 @@ function UpdateProfile()
                         {/* First Name */}
                         <div className="form-group">
                             <label> First Name </label>
-                            <Field type="text" name="fname" className="form-control" placeholder="Enter First Name" />
+                            <Field type="text" name="fname" className="form-control" placeholder="Enter first name" />
                             <span className='text-danger'> <ErrorMessage name="fname" /> </span>
                         </div>
 
                         {/* Last Name */}
                         <div className="form-group">
                             <label> Last Name </label>
-                            <Field type="text" name="lname" className="form-control" placeholder="Enter Last Name" />
+                            <Field type="text" name="lname" className="form-control" placeholder="Enter last name" />
                             <span className='text-danger'> <ErrorMessage name="lname" /> </span>
                         </div>     
 
                         {/* Age */}
                         <div className="form-group">
                             <label> Age </label>
-                            <Field type="number" name="age" className="form-control" placeholder="Enter Age" />
+                            <Field type="number" name="age" className="form-control" placeholder="Enter age" />
                             <span className='text-danger'> <ErrorMessage name="age" /> </span>
                         </div>   
 
                         {/* Gender */}
                         <div className="form-group">
                             <label> Gender </label>
-                            <Field as="select" name="gender" className="form-control" placeholder="Enter Age" >
-                                <option value="">Select</option>
+                            <Field as="select" name="gender" className="form-control">
+                                <option value=""> Select </option>
                                 <option value="Male"> Male </option>
                                 <option value="Female"> Female </option>
                             </Field>
@@ -63,14 +63,14 @@ function UpdateProfile()
                         {/* Email */}
                         <div className="form-group">
                             <label> Email </label>
-                            <Field type="text" name="email" className="form-control" placeholder="Enter Email" />
+                            <Field type="text" name="email" className="form-control" placeholder="Enter email" />
                             <span className='text-danger'> <ErrorMessage name="email" /> </span>
                         </div>
 
                         {/* Username */}
                         <div className="form-group">
                             <label> Username </label>
-                            <Field type="text" name="username" className="form-control" placeholder="Enter Username" />
+                            <Field type="text" name="username" className="form-control" placeholder="Enter username" />
                             <span className='text-danger'> <ErrorMessage name="username" /> </span>
                         </div>      
 

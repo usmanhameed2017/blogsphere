@@ -22,21 +22,21 @@ function UpdatePassword()
                     {/* Old Password */}
                     <div className="form-group">
                         <label> Old Password </label>
-                        <Field type="password" name="oldPassword" className="form-control" placeholder="Enter Old Password" />
+                        <Field type="password" name="oldPassword" className="form-control" placeholder="Enter old password" />
                         <span className='text-danger'> <ErrorMessage name="oldPassword" /> </span>
                     </div>
 
                     {/* New Password */}
                     <div className="form-group">
                         <label> Password </label>
-                        <Field type="password" name="newPassword" className="form-control" placeholder="Enter New Password" />
+                        <Field type="password" name="newPassword" className="form-control" placeholder="Enter new password" />
                         <span className='text-danger'> <ErrorMessage name="newPassword" /> </span>
                     </div>
 
                     {/* Confirm Password */}
                     <div className="form-group">
                         <label> Confirm Password </label>
-                        <Field type="password" name="confirmPassword" className="form-control" placeholder="Re-Enter Password" />
+                        <Field type="password" name="confirmPassword" className="form-control" placeholder="Re-enter Password" />
                         <span className='text-danger'> <ErrorMessage name="confirmPassword" /> </span>
                     </div>                              
 
