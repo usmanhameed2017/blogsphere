@@ -1,8 +1,22 @@
-import React from 'react';
-import { Form, Button } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Button } from 'react-bootstrap';
+import FormBS from '../components/form';
+import { Form, Field, ErrorMessage } from 'formik';
+import { contactFormValidation } from '../validation/contact';
+import axios from 'axios';
+import { backendURL } from '../../constants';
+import { ApiResponse } from '../utils/ApiResponse';
+import { ApiError } from '../utils/ApiError';
 
 function Contact() 
 {
+    const [isLoading, setLoading] = useState(false);
+    const initialValues = {
+        name:"",
+        email:"",
+        message:""
+    };
+
     return (
         <div>
             {/* Hero Section */}
@@ -32,27 +46,50 @@ function Contact()
 
                 {/* Right Side - Form */}
                 <div className="contact-right">
-                    <Form className="contact-form">
-                        <h2>Contact Us</h2>
-                        <p>We're here to assist you! Reach out anytime!</p>
+                    <FormBS initialValues={initialValues} validationSchema={contactFormValidation}
+                    handlerFunction={ async (values, action) => {
+                        try
+                        {
+                            setLoading(true);
+                            const response = await axios.post(`${backendURL}/user/contact`, values);
+                            alert(ApiResponse(response).message);
+                            action.resetForm();
+                            setLoading(false);
+                        }
+                        catch(error)
+                        {
+                            alert(ApiError(error).message);
+                            setLoading(false);
+                        }
+                    } }
+                    >
+                        <Form className="contact-form">
+                            <h2>Contact Us</h2>
+                            <p>We're here to assist you! Reach out anytime!</p>
 
-                        <Form.Group className="mb-3" controlId="formName">
-                            <Form.Label>Your Name</Form.Label>
-                            <Form.Control type="text" placeholder="Enter your name" />
-                        </Form.Group>
+                            {/* Full Name */}
+                            <div className="form-group mb-2">
+                                <label> Your Name </label>
+                                <Field type="text" name="name" className="form-control" placeholder="Enter your name" />
+                                <span className='text-danger'> <ErrorMessage name='name' /> </span>
+                            </div>
 
-                        <Form.Group className="mb-3" controlId="formEmail">
-                            <Form.Label>Email Address</Form.Label>
-                            <Form.Control type="email" placeholder="Enter your email" />
-                        </Form.Group>
+                            {/* Email */}
+                            <div className="form-group mb-2">
+                                <label>Email</label>
+                                <Field type="email" name="email" className="form-control" placeholder="Enter your email" />
+                                <span className='text-danger'> <ErrorMessage name='email' /> </span>
+                            </div>
 
-                        <Form.Group className="mb-3" controlId="formMessage">
-                            <Form.Label>Message</Form.Label>
-                            <Form.Control as="textarea" rows={4} placeholder="Write your message" />
-                        </Form.Group>
+                            <div className="form-group mb-2">
+                                <label>Message</label>
+                                <Field as="textarea" name="message" rows={4} className="form-control" placeholder="Write your message" />
+                                <span className='text-danger'> <ErrorMessage name='message' /> </span>
+                            </div>
 
-                        <Button variant="primary" type="submit" className="custom-btn"> Send Message </Button>
-                    </Form>
+                            <Button variant="primary" type="submit" className="custom-btn" disabled={isLoading}> Send Message </Button>
+                        </Form>
+                    </FormBS>
                 </div>
             </div>            
         </div>

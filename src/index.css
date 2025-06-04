@@ -479,9 +479,14 @@ a {
 }
 
 .contact-form {
-  width: 100%;
-  max-width: 500px;
+  width: 600px;
+  max-width: 800px;
   color: white;
+  padding: 1rem;
+}
+
+.contact-form label{
+  margin-bottom: 2px;
 }
 
 .contact-form h2 {
