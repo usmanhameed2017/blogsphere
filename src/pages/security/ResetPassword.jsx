@@ -48,10 +48,10 @@ function ResetPassword()
     if(isValid === false) return <Navigate to="/login" />
 
     return (
-        <div style={{ marginTop:"200px" }}>
+        <div className='form-container'>
             <Container>
                 <Row>
-                    <Col xs='12' sm='6' md='5' lg='5' className='mx-auto shadow p-5' style={{ borderRadius:"20px" }}>
+                    <Col className='mx-auto'>
                         {/* Forgot password */}
                         <FormBS initialValues={{ _id:id, userId:userId, newPassword:"", confirmPassword:"" }} validationSchema={resetPasswordValidation} 
                         handlerFunction={ async (values, action) => {

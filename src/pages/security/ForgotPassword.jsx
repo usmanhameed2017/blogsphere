@@ -14,10 +14,10 @@ function ForgotPassword()
     const [isLoading, setLoading] = useState(false);
 
     return (
-        <div style={{ marginTop:"200px" }}>
+        <div className='form-container'>
             <Container>
                 <Row>
-                    <Col xs='12' sm='6' md='5' lg='5' className='mx-auto shadow p-5' style={{ borderRadius:"20px" }}>
+                    <Col className='mx-auto'>
                         {/* Forgot password */}
                         <FormBS initialValues={{ email:'' }} validationSchema={forgotPasswordValidation} 
                         handlerFunction={ async (values, action) => {
