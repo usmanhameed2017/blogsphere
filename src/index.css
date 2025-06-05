@@ -691,3 +691,9 @@ a {
     margin: 0;
     font-weight: 500;
 }
+
+/* Font icon */
+.icon:hover{
+  cursor: pointer;
+  color: #00bcd4;
+}

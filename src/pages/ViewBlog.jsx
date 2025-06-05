@@ -1,15 +1,18 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchSingleBlog } from '../api/blogs';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import { getTime } from '../utils/getTime';
 import CommentSection from '../components/commentSection';
 import { ApiResponse } from '../utils/ApiResponse';
 import { ApiError } from '../utils/ApiError';
 import { axiosOptions, backendURL } from '../../constants';
 import axios from 'axios';
-import { FaThumbsUp, FaRegThumbsUp, FaCommentDots } from 'react-icons/fa';
+import { FaThumbsUp, FaRegThumbsUp, FaCommentDots, FaEdit, FaTrash } from 'react-icons/fa';
 import { likeOnBlog } from '../api/like';
+import FormBS from '../components/form';
+import { Form, Field, ErrorMessage } from 'formik';
+import { editBlog } from '../validation/blog';
 
 
 function ViewBlog() 
@@ -18,6 +21,7 @@ function ViewBlog()
     const [blog, setBlog] = useState(null);
     const [text, setText] = useState('');
     const [reloadComments, setReloadComments] = useState(0);
+    const [isEditable, setEditable] = useState(false);
 
     // Add comment on blog
     const addCommentOnBlog = useCallback(async (e) => {
@@ -45,32 +49,119 @@ function ViewBlog()
     return (
         <div className="blog-container">
             <Container>
-                <Row>
-                    <Col>
-                        {/* Hero Section */}
-                        <section className="home-hero" style={{ backgroundColor: '#1e1f26', color: 'white', padding: '4rem 2rem' }}>
-                            <h1>{ blog?.title } </h1>
-                        </section>
-                        <section>
-                            <p className='blog-para'> { blog?.description } </p>
-                        </section>
-                    </Col>
-                </Row>
 
-                <div className='contentImages'>
+                {/* Icons */}
                 {
-                    blog?.images && blog?.images?.length > 0 && (
-                        blog?.images?.map(image => (
-                            <img key={image}
-                            src={image} 
-                            alt={image} 
-                            height={400} 
-                            width={400}
-                            className='contentImage' />
-                        ))
+                    !isEditable ? (
+                        <Row style={{ marginTop:"100px" }}>
+                            <Col md={{ size:"1", offset:"11" }}>
+                                <FaEdit className='icon' size={25} onClick={ () => setEditable(true) } /> &nbsp;
+                                <FaTrash className='icon' size={20} />
+                            </Col>
+                        </Row>                        
+                    )
+                    :
+                    (
+                        <div style={{ marginTop:'100px' }}></div> // For spacing
                     )
                 }
-                </div>
+
+                {
+                    // Editable Blog
+                    isEditable ? 
+                    (
+                        <div>
+                            <Row>
+                                <Col>
+                                    <FormBS 
+                                    initialValues={{ title:blog?.title, description:blog?.description, coverImage:"" }}
+                                    validationSchema={editBlog}
+                                    handlerFunction={ async (values) => {
+                                        try
+                                        {
+                                            const response = await axios.patch(`${backendURL}/blog/${blog?._id}`, values, 
+                                            { ...axiosOptions, headers:{ "Content-Type":"multipart/form-data" }  });
+                                            setEditable(false);
+                                            setReloadComments(reloadComments + 1);
+                                            console.log(ApiResponse(response));
+                                        }
+                                        catch(error)
+                                        {
+                                            console.log(ApiError(error));
+                                        }
+                                    }} >
+
+                                    {
+                                        ({ setFieldValue }) => (
+                                            <Form>
+                                                {/* Title */}
+                                                <div className="form-group">
+                                                    <label> Title </label>
+                                                    <Field type="text" name="title" className="form-control" placeholder="Enter title" />
+                                                    <span className='text-danger'> <ErrorMessage name='title' /> </span>
+                                                </div>
+
+                                                {/* Description */}
+                                                <div className="form-group">
+                                                    <label> Description </label>
+                                                    <Field as="textarea" name="description" rows="10" className="form-control" placeholder="Enter description" />
+                                                    <span className='text-danger'> <ErrorMessage name='description' /> </span>
+                                                </div>    
+
+                                                {/* Cover Image */}
+                                                <div className="form-group">
+                                                    <label> Cover Image </label>
+                                                    <input type='file' name="coverImage" className="form-control"
+                                                    onChange={ (e) => setFieldValue('coverImage', e.target.files[0]) } />
+                                                    <span className='text-danger'> <ErrorMessage name='coverImage' /> </span>
+                                                </div>
+
+                                                <div className="form-group mt-2">
+                                                    <Button type='submit' variant='success'> Save </Button>
+                                                    <Button variant='secondary' className='ms-2' onClick={ () => setEditable(false) }> Cancel </Button> 
+                                                </div>                                                                                               
+                                            </Form>
+                                        )
+                                    }                                        
+                                    </FormBS>
+                                </Col>
+                            </Row>
+                        </div>
+                    ) 
+                    : 
+                    (
+                        // Blog
+                        <div>
+                            <Row>
+                                <Col>
+                                    {/* Blog Title */}
+                                    <h1 className='superHeading text-center'>{ blog?.title } </h1>
+
+                                    {/* Blog Description */}
+                                    <section>
+                                        <p className='blog-para'> { blog?.description } </p>
+                                    </section>
+                                </Col>
+                            </Row>
+
+                            <div className='contentImages'>
+                            {
+                                blog?.images && blog?.images?.length > 0 && (
+                                    blog?.images?.map(image => (
+                                        <img key={image}
+                                        src={image} 
+                                        alt={image} 
+                                        height={400} 
+                                        width={400}
+                                        className='contentImage' />
+                                    ))
+                                )
+                            }
+                            </div>
+                        </div>
+                    )
+                }
+
                 <hr />
 
                 {/* Created By */}
