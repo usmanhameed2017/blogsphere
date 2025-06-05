@@ -7,6 +7,11 @@ function ProfileBlogs({ blogs })
     return (
         <>
             <Container className="mt-4">
+                <Row>
+                    <Col>
+                        <h1 className='superHeading text-center'> MY BLOGS </h1>
+                    </Col>
+                </Row>
                 {/* Blog Cards Row */}
                 <Row>
                     {
