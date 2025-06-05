@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { fetchSingleBlog } from '../api/blogs';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { getTime } from '../utils/getTime';
 import CommentSection from '../components/commentSection';
 import { ApiResponse } from '../utils/ApiResponse';
 import { ApiError } from '../utils/ApiError';
-import { axiosOptions, backendURL } from '../../constants';
+import { axiosOptions, backendURL, getUser } from '../../constants';
 import axios from 'axios';
 import { FaThumbsUp, FaRegThumbsUp, FaCommentDots, FaEdit, FaTrash } from 'react-icons/fa';
 import { likeOnBlog } from '../api/like';
@@ -22,6 +22,11 @@ function ViewBlog()
     const [text, setText] = useState('');
     const [reloadComments, setReloadComments] = useState(0);
     const [isEditable, setEditable] = useState(false);
+    const [isloading, setLoading] = useState(false);
+
+    const navigate = useNavigate();
+
+    const user = getUser();
 
     // Add comment on blog
     const addCommentOnBlog = useCallback(async (e) => {
@@ -39,12 +44,30 @@ function ViewBlog()
         }
     },[text]);
 
+    // Fetch blog on page load
     useEffect(() => {
         fetchSingleBlog(id)
         .then(response => setBlog(response))
         .catch(error => console.log(error));
     },[reloadComments, likeOnBlog]);
-    console.log(blog);
+    // console.log(blog);
+
+    // Delete blog
+    const deleteBlog = useCallback(async (id) => {
+        if(window.confirm("Are you sure you want to delete this blog?"))
+        {
+            try 
+            {
+                const response = await axios.delete(`${backendURL}/blog/${id}`, axiosOptions);
+                alert(ApiResponse(response).message);
+                navigate("/user/profile");
+            } 
+            catch (error) 
+            {
+                alert(ApiError(error).message);
+            }
+        }
+    },[]);
 
     return (
         <div className="blog-container">
@@ -52,11 +75,20 @@ function ViewBlog()
 
                 {/* Icons */}
                 {
-                    !isEditable ? (
+                    user?._id === blog?.createdBy?._id && !isEditable ? (
                         <Row style={{ marginTop:"100px" }}>
-                            <Col md={{ size:"1", offset:"11" }}>
-                                <FaEdit className='icon' size={25} onClick={ () => setEditable(true) } /> &nbsp;
-                                <FaTrash className='icon' size={20} />
+                            <Col 
+                            // Break points
+                            xs={{ size:"2", offset:"10" }} 
+                            sm={{ size:"3", offset:"9" }} 
+                            md={{ size:"1", offset:"11" }} 
+                            lg={{ size:"1", offset:"11" }}>
+                                <div style={{ whiteSpace:"nowrap" }}>
+                                    {/* Edit Blog */}
+                                    <FaEdit className='icon' size={25} onClick={ () => setEditable(true) } /> &nbsp;
+                                    {/* Delete Blog */}
+                                    <FaTrash className='icon' size={20} onClick={ () => deleteBlog(blog?._id) } />                                    
+                                </div>
                             </Col>
                         </Row>                        
                     )
@@ -79,15 +111,18 @@ function ViewBlog()
                                     handlerFunction={ async (values) => {
                                         try
                                         {
+                                            setLoading(true);
                                             const response = await axios.patch(`${backendURL}/blog/${blog?._id}`, values, 
                                             { ...axiosOptions, headers:{ "Content-Type":"multipart/form-data" }  });
                                             setEditable(false);
                                             setReloadComments(reloadComments + 1);
-                                            console.log(ApiResponse(response));
+                                            alert(ApiResponse(response).message);
+                                            setLoading(false);
                                         }
                                         catch(error)
                                         {
-                                            console.log(ApiError(error));
+                                            alert(ApiError(error).message);
+                                            setLoading(false);
                                         }
                                     }} >
 
@@ -117,7 +152,7 @@ function ViewBlog()
                                                 </div>
 
                                                 <div className="form-group mt-2">
-                                                    <Button type='submit' variant='success'> Save </Button>
+                                                    <Button type='submit' variant='success' disabled={isloading}> Save </Button>
                                                     <Button variant='secondary' className='ms-2' onClick={ () => setEditable(false) }> Cancel </Button> 
                                                 </div>                                                                                               
                                             </Form>
