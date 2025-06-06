@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaPencilAlt, FaComments, FaHeart, FaRocket, FaLightbulb } from 'react-icons/fa';
+import { FaPencilAlt, FaComments, FaHeart, FaRocket } from 'react-icons/fa';
 
 function About() 
 {

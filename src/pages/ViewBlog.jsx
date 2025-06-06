@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { useNavigate, useParams, useLocation } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { fetchSingleBlog } from '../api/blogs';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { getTime } from '../utils/getTime';
@@ -85,9 +85,9 @@ function ViewBlog()
                             lg={{ size:"1", offset:"11" }}>
                                 <div style={{ whiteSpace:"nowrap" }}>
                                     {/* Edit Blog */}
-                                    <FaEdit className='icon' size={25} onClick={ () => setEditable(true) } /> &nbsp;
+                                    <FaEdit className='icon' size={25} onClick={ () => setEditable(true) } title='Edit blog' /> &nbsp;
                                     {/* Delete Blog */}
-                                    <FaTrash className='icon' size={20} onClick={ () => deleteBlog(blog?._id) } />                                    
+                                    <FaTrash className='icon' size={20} onClick={ () => deleteBlog(blog?._id) } title='Delete blog' />                                    
                                 </div>
                             </Col>
                         </Row>                        

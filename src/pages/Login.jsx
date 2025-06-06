@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Tabs, Tab, Button, Alert } from "react-bootstrap";
+import React from "react";
+import { Tabs, Tab, Button } from "react-bootstrap";
 import { Form, Field, ErrorMessage } from 'formik';
 import FormBS from "../components/form";
 import { loginInitialValues, signupInitialValues } from "../schema/user";

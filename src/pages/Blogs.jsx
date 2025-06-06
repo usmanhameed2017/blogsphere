@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchAllBlogs } from '../api/blogs';
 import CardBS from '../components/card';
-import { Button, Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 
 function Blogs() {
     const [blogs, setBlogs] = useState(null);
