@@ -8,6 +8,7 @@ import { resetPasswordValidation } from '../../validation/user';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import FormBS from '../../components/form';
 import { Form, Field, ErrorMessage } from 'formik';
+import { showError, showSuccess } from '../../utils/toasterMessage';
 
 function ResetPassword() 
 {
@@ -61,13 +62,13 @@ function ResetPassword()
                                 const response = await axios.patch(`${backendURL}/user/security/resetPassword`, values);
                                 action.resetForm();
                                 setLoading(false);
-                                alert(ApiResponse(response).message);
+                                showSuccess(ApiResponse(response).message);
                                 navigate("/login");
                             } 
                             catch (error) 
                             {
                                 setLoading(false);
-                                alert(ApiError(error).message);
+                                showError(ApiError(error).message);
                             }                            
                         }}>
                             <Form>

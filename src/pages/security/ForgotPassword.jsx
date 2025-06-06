@@ -8,6 +8,7 @@ import axios from 'axios';
 import { backendURL } from '../../../constants';
 import { ApiResponse } from '../../utils/ApiResponse';
 import { ApiError } from '../../utils/ApiError';
+import { showError, showSuccess } from '../../utils/toasterMessage';
 
 function ForgotPassword() 
 {
@@ -27,12 +28,12 @@ function ForgotPassword()
                                 const response = await axios.post(`${backendURL}/user/forgotPassword`, values);
                                 action.resetForm();
                                 setLoading(false);
-                                alert(ApiResponse(response).message);
+                                showSuccess(ApiResponse(response).message);
                             } 
                             catch (error) 
                             {
                                 setLoading(false);
-                                alert(ApiError(error).message);
+                                showError(ApiError(error).message);
                             }                            
                         }}>
                             <Form>

@@ -9,6 +9,7 @@ import { addBlog } from '../../validation/blog';
 import axios from 'axios';
 import { ApiResponse } from '../../utils/ApiResponse';
 import { ApiError } from '../../utils/ApiError';
+import { showError, showSuccess } from '../../utils/toasterMessage';
 
 function UserProfile({ setReloadBlog }) 
 {
@@ -95,7 +96,7 @@ function UserProfile({ setReloadBlog })
                                             });
                                             
                                             const response = await axios.post(`${backendURL}/blog`, formData, axiosOptions);
-                                            alert(ApiResponse(response).message);
+                                            showSuccess(ApiResponse(response).message);
                                             action.resetForm();
                                             setUpload(false);
                                             setReloadBlog(prev => prev + 1);
@@ -103,7 +104,7 @@ function UserProfile({ setReloadBlog })
                                         }
                                         catch(error)
                                         {
-                                            alert(ApiError(error).message);
+                                            showError(ApiError(error).message);
                                         }
                                     } }
                                     >

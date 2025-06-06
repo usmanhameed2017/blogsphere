@@ -13,6 +13,7 @@ import { likeOnBlog } from '../api/like';
 import FormBS from '../components/form';
 import { Form, Field, ErrorMessage } from 'formik';
 import { addBlog } from '../validation/blog';
+import { showError, showSuccess } from '../utils/toasterMessage';
 
 
 function ViewBlog() 
@@ -36,11 +37,11 @@ function ViewBlog()
             const response = await axios.post(`${backendURL}/comment/blog`, { text:text, blogID:id }, axiosOptions);
             setReloadComments((prev) => prev + 1);
             setText('');
-            alert(ApiResponse(response).message);
+            showSuccess(ApiResponse(response).message);
         } 
         catch (error) 
         {
-            alert(ApiError(error).message);
+            showError(ApiError(error).message);
         }
     },[text]);
 
@@ -50,7 +51,6 @@ function ViewBlog()
         .then(response => setBlog(response))
         .catch(error => console.log(error));
     },[reloadComments, likeOnBlog]);
-    // console.log(blog);
 
     // Delete blog
     const deleteBlog = useCallback(async (id) => {
@@ -59,12 +59,12 @@ function ViewBlog()
             try 
             {
                 const response = await axios.delete(`${backendURL}/blog/${id}`, axiosOptions);
-                alert(ApiResponse(response).message);
+                showSuccess(ApiResponse(response).message);
                 navigate("/user/profile");
             } 
             catch (error) 
             {
-                alert(ApiError(error).message);
+                showError(ApiError(error).message);
             }
         }
     },[]);
@@ -116,12 +116,12 @@ function ViewBlog()
                                             { ...axiosOptions, headers:{ "Content-Type":"multipart/form-data" }  });
                                             setEditable(false);
                                             setReloadComments(reloadComments + 1);
-                                            alert(ApiResponse(response).message);
+                                            showSuccess(ApiResponse(response).message);
                                             setLoading(false);
                                         }
                                         catch(error)
                                         {
-                                            alert(ApiError(error).message);
+                                            showError(ApiError(error).message);
                                             setLoading(false);
                                         }
                                     }} >

@@ -7,6 +7,7 @@ import axios from 'axios';
 import { axiosOptions, backendURL, getUser } from '../../../constants';
 import { ApiResponse } from '../../utils/ApiResponse';
 import { ApiError } from '../../utils/ApiError';
+import { showError, showSuccess } from '../../utils/toasterMessage';
 
 function CommentSection({ comments, setReloadComments, createdById }) 
 {
@@ -36,13 +37,13 @@ function CommentSection({ comments, setReloadComments, createdById })
         {
             const response = await axios.patch(`${backendURL}/comment/blog/${commentId}`, { text:editedText }, axiosOptions);
             setReloadComments(prev => prev + 1);
-            alert(ApiResponse(response).message);
+            showSuccess(ApiResponse(response).message);
             setEditingCommentId(null);
             setEditedText('');
         } 
         catch(error) 
         {
-            alert(ApiError(error));
+            showError(ApiError(error));
         }
     },[editedText]);
 
@@ -58,13 +59,13 @@ function CommentSection({ comments, setReloadComments, createdById })
         try 
         {
             const response = await axios.delete(`${backendURL}/comment/blog/${commentId}`, axiosOptions);
-            alert(ApiResponse(response).message);
+            showSuccess(ApiResponse(response).message);
             setReloadComments(prev => prev + 1);
             setShowDropdownId(null);
         } 
         catch (error) 
         {
-            alert(ApiError(error).message);
+            showError(ApiError(error).message);
         }
     },[]);
 

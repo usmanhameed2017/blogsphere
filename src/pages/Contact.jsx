@@ -7,6 +7,7 @@ import axios from 'axios';
 import { backendURL } from '../../constants';
 import { ApiResponse } from '../utils/ApiResponse';
 import { ApiError } from '../utils/ApiError';
+import { showError, showSuccess } from '../utils/toasterMessage';
 
 function Contact() 
 {
@@ -52,13 +53,13 @@ function Contact()
                         {
                             setLoading(true);
                             const response = await axios.post(`${backendURL}/user/contact`, values);
-                            alert(ApiResponse(response).message);
+                            showSuccess(ApiResponse(response).message);
                             action.resetForm();
                             setLoading(false);
                         }
                         catch(error)
                         {
-                            alert(ApiError(error).message);
+                            showError(ApiError(error).message);
                             setLoading(false);
                         }
                     } }

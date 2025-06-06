@@ -14,6 +14,8 @@ import Profile from './pages/user/Profile';
 import ProfileSettings from './pages/user/ProfileSettings';
 import ResetPassword from './pages/security/ResetPassword';
 import ForgotPassword from './pages/security/ForgotPassword';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function App() 
@@ -48,6 +50,7 @@ function App()
             </p>
           </section>
         <Footer />
+        <ToastContainer />
       </AuthProvider>
     </div>
   

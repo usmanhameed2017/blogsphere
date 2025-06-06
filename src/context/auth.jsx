@@ -4,6 +4,7 @@ import { axiosOptions, backendURL } from '../../constants';
 import { ApiResponse } from '../utils/ApiResponse';
 import { ApiError } from '../utils/ApiError';
 import { useNavigate } from 'react-router-dom'
+import { showError, showSuccess } from '../utils/toasterMessage';
 
 const AuthContext = createContext();
 
@@ -23,12 +24,12 @@ function AuthProvider({ children })
             const response = await axios.post(`${backendURL}/user/signup`, user, { ...axiosOptions, headers:{ "Content-Type":"multipart/form-data" } });
             action.resetForm();
             setLoading(false);
-            alert(ApiResponse(response).message);
+            showSuccess(ApiResponse(response).message);
         } 
         catch(error) 
         {
             setLoading(false);
-            alert(ApiError(error).message);
+            showError(ApiError(error).message);
         }
     },[]);    
 
@@ -45,13 +46,13 @@ function AuthProvider({ children })
             localStorage.setItem("user", JSON.stringify(data.user));
 
             action.resetForm();
-            alert(message);
+            showSuccess(ApiResponse(response).message);
             navigate('/');
         } 
         catch (error) 
         {
             setLoading(false);
-            alert(ApiError(error).message);
+            showError(ApiError(error).message);
         }
     },[]);
 
@@ -67,7 +68,7 @@ function AuthProvider({ children })
         } 
         catch(error) 
         {
-            alert(ApiError(error).message);
+            showError(ApiError(error).message);
         }
     },[]);
 
