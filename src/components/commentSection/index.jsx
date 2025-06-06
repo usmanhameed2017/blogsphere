@@ -4,16 +4,18 @@ import { getTime } from '../../utils/getTime';
 import { useNavigate } from 'react-router-dom';
 import { FaEllipsisV, FaEdit, FaTrash } from 'react-icons/fa';
 import axios from 'axios';
-import { axiosOptions, backendURL } from '../../../constants';
+import { axiosOptions, backendURL, getUser } from '../../../constants';
 import { ApiResponse } from '../../utils/ApiResponse';
 import { ApiError } from '../../utils/ApiError';
 
-function CommentSection({ comments, setReloadComments }) 
+function CommentSection({ comments, setReloadComments, createdById }) 
 {
     const navigate = useNavigate();
     const [showDropdownId, setShowDropdownId] = useState(null);
     const [editingCommentId, setEditingCommentId] = useState(null); // Which comment is being edited
     const [editedText, setEditedText] = useState(''); // Store edited text
+
+    const user = getUser();
 
     // Toggle dropdown
     const toggleDropdown = useCallback((commentId) => {
@@ -89,36 +91,52 @@ function CommentSection({ comments, setReloadComments })
                                             </strong>
                                         </div>
 
-                                        {/* Dropdown menu positioning */}
-                                        <div className='dropdown-container' style={{ position: 'relative', display: 'inline-block' }}>
-                                            <FaEllipsisV style={{ cursor: 'pointer' }} onClick={() => toggleDropdown(comment?._id)} />
+                                        {/* Three dotted menu will be shown to owner of blog and the one who commented on blog */}
+                                        {
+                                            createdById === user?._id || comment?.commentedBy?._id === user?._id ? 
+                                            (
+                                                // Dropdown menu positioning
+                                                <div className='dropdown-container' style={{ position: 'relative', display: 'inline-block' }}>
+                                                    <FaEllipsisV style={{ cursor: 'pointer' }} onClick={() => toggleDropdown(comment?._id)} />
 
-                                            {
-                                                showDropdownId && showDropdownId === comment?._id && 
-                                                (
-                                                    <Dropdown.Menu 
-                                                    show 
-                                                    className='show-dropdown' 
-                                                    style={{ 
-                                                        position: 'absolute', 
-                                                        right: 0,
-                                                        top: '100%',
-                                                        zIndex: 1000,
-                                                    }} >
+                                                    {
+                                                        showDropdownId && showDropdownId === comment?._id && 
+                                                        (
+                                                            <Dropdown.Menu 
+                                                            show 
+                                                            className='show-dropdown' 
+                                                            style={{ 
+                                                                position: 'absolute', 
+                                                                right: 0,
+                                                                top: '100%',
+                                                                zIndex: 1000,
+                                                            }} >
 
-                                                        {/* Edit */}
-                                                        <Dropdown.Item onClick={ () => handleEditClick(comment)}>
-                                                            <FaEdit size={20} /> Edit
-                                                        </Dropdown.Item>
+                                                            {/* Only commentor can edit his own comment */}
+                                                            {
+                                                                comment?.commentedBy?._id === user?._id && (
+                                                                    //Edit
+                                                                    <Dropdown.Item onClick={ () => handleEditClick(comment)}>
+                                                                        <FaEdit size={20} /> Edit
+                                                                    </Dropdown.Item>                                                                    
+                                                                )
+                                                            }
 
-                                                        {/* Delete */}
-                                                        <Dropdown.Item onClick={ () => deleteComment(comment._id) }>
-                                                            <FaTrash size={20} /> Delete
-                                                        </Dropdown.Item>
-                                                    </Dropdown.Menu>
-                                                )
-                                            }
-                                        </div>
+                                                                {/* Delete */}
+                                                                <Dropdown.Item onClick={ () => deleteComment(comment._id) }>
+                                                                    <FaTrash size={20} /> Delete
+                                                                </Dropdown.Item>
+                                                            </Dropdown.Menu>
+                                                        )
+                                                    }
+                                                </div>
+                                            )
+                                            :
+                                            (
+                                                <div></div>
+                                            )
+                                        }
+
                                     </div>
 
                                     {/* Comment Text or Edit Form */}

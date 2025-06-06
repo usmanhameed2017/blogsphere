@@ -273,7 +273,11 @@ function ViewBlog()
                     <Col>
                     {
                         blog?.comments && blog?.comments.length > 0 ?
-                        <CommentSection comments={blog?.comments} setReloadComments={setReloadComments} />
+                        <CommentSection 
+                        comments={blog?.comments} 
+                        setReloadComments={setReloadComments} 
+                        createdById={blog?.createdBy?._id}    
+                        />
                         :
                         <section className='home-hero'>
                             <h2> No Comments </h2>
