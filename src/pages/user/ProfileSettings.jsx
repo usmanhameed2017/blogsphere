@@ -1,7 +1,7 @@
 import React from 'react';
-import UpdateProfile from '../components/updateProfile';
+import UpdateProfile from '../../components/updateProfile';
 import { Col, Container, Row } from 'react-bootstrap';
-import UpdatePassword from '../components/updatePassword';
+import UpdatePassword from '../../components/updatePassword';
 
 function ProfileSettings() 
 {

@@ -11,7 +11,7 @@ import Blogs from './pages/Blogs';
 import ViewBlog from './pages/ViewBlog';
 import ProtectedRoute from './pages/ProtectedRoute';
 import Profile from './pages/user/Profile';
-import ProfileSettings from './pages/ProfileSettings';
+import ProfileSettings from './pages/user/ProfileSettings';
 import ResetPassword from './pages/security/ResetPassword';
 import ForgotPassword from './pages/security/ForgotPassword';
 

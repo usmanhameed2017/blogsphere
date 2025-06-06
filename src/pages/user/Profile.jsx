@@ -6,16 +6,17 @@ import ProfileBlogs from '../../components/profileBlogs';
 function Profile() 
 {
     const [blogs, setBlogs] = useState(null);
+    const [reloadBlog, setReloadBlog] = useState(0);
 
     useEffect(() => {
         fetchMyBlogs()
         .then(response => setBlogs(response))
         .catch(error => console.log(error.message));
-    },[]);
+    },[reloadBlog]);
 
     return (
         <>
-            <UserProfile />
+            <UserProfile setReloadBlog={ setReloadBlog } />
             <ProfileBlogs blogs={blogs} />          
         </>
     );

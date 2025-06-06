@@ -12,7 +12,7 @@ import { FaThumbsUp, FaRegThumbsUp, FaCommentDots, FaEdit, FaTrash } from 'react
 import { likeOnBlog } from '../api/like';
 import FormBS from '../components/form';
 import { Form, Field, ErrorMessage } from 'formik';
-import { editBlog } from '../validation/blog';
+import { addBlog } from '../validation/blog';
 
 
 function ViewBlog() 
@@ -107,7 +107,7 @@ function ViewBlog()
                                 <Col>
                                     <FormBS 
                                     initialValues={{ title:blog?.title, description:blog?.description, coverImage:"" }}
-                                    validationSchema={editBlog}
+                                    validationSchema={addBlog}
                                     handlerFunction={ async (values) => {
                                         try
                                         {
@@ -146,7 +146,7 @@ function ViewBlog()
                                                 {/* Cover Image */}
                                                 <div className="form-group">
                                                     <label> Cover Image </label>
-                                                    <input type='file' name="coverImage" className="form-control"
+                                                    <input type='file' name="coverImage" className="form-control" accept="image/*"
                                                     onChange={ (e) => setFieldValue('coverImage', e.target.files[0]) } />
                                                     <span className='text-danger'> <ErrorMessage name='coverImage' /> </span>
                                                 </div>

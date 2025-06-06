@@ -8,7 +8,7 @@ const imageTypeChecker = (value) => !value || allowedImageTypes.includes(value?.
 const imageSizeChecker = (value) => !value || value.size && value.size <= 5000000
 
 // Update blog validation
-export const editBlog = Yup.object({
+export const addBlog = Yup.object({
     title:Yup.string()
     .min(5, "Blog title must be at least 5 characters long")
     .max(50, "Blog title must not be longer than 30 characters")
