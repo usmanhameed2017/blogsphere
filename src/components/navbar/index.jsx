@@ -19,7 +19,7 @@ function NavbarBS() {
                     <Navbar bg='dark' variant='dark' expand='sm' fixed='top' style={{ backgroundColor:'#1e1f26' }}>
                         <Container fluid>
                             <Navbar.Brand>
-                                <img src='/public/logo.png' height={40} width={40} className='align-top rounded-circle' /> &nbsp;
+                                <img src='/logo.png' height={40} width={40} className='align-top rounded-circle' /> &nbsp;
                             </Navbar.Brand>
 
                             <Navbar.Toggle aria-controls='my-nav' />
@@ -40,7 +40,7 @@ function NavbarBS() {
                                     {
                                         user ? (
                                             <div className="user-dropdown" onClick={toggleDropdown}>
-                                                <img src={ user?.profile_image || '/public/default-avatar.webp' } alt="Profile" className="profile-img" />
+                                                <img src={ user?.profile_image || '/default-avatar.webp' } alt="Profile" className="profile-img" />
                                                 <span className="user-name">{ user?.fname }</span>
                                                 <FaChevronDown className="dropdown-icon" />
                                                 {
