@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { fetchAllBlogs } from '../api/blogs';
 import CardBS from '../components/card';
-import { Container, Row, Col, Pagination } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
+import ServerSidePagination from '../components/pagination';
 
 function Blogs() {
     const [blogs, setBlogs] = useState(null);
@@ -60,37 +61,7 @@ function Blogs() {
                 {/* Pagination row */}
                 <Row>
                     <Col>
-                        <Pagination>
-
-                            {/* Previous Button */}
-                            <Pagination.First 
-                            onClick={ () => setCurrentPage(blogs?.prevPage) } 
-                            disabled={ blogs?.prevPage === null }
-                            />
-
-                            {/* Button Numbers */}
-                            {
-                                Array.from({ length:blogs?.totalPages }, (_, index) => (
-                                    <Pagination.Item 
-                                    key={ index } 
-                                    onClick={ () => setCurrentPage(index + 1) } 
-                                    active={ index + 1 == blogs?.page }
-                                    > 
-                                        { index + 1 } 
-                                    </Pagination.Item>
-                                ))
-                            }
-                            
-
-                            {/* <Pagination.Ellipsis /> */}
-
-                            {/* Next Button */}
-                            <Pagination.Last
-                            onClick={ () => setCurrentPage(blogs?.nextPage) }
-                            disabled={ blogs?.nextPage === null }
-                            />
-                            
-                        </Pagination>
+                        <ServerSidePagination blogs={blogs} setCurrentPage={setCurrentPage} />
                     </Col>
                 </Row>
             </Container>

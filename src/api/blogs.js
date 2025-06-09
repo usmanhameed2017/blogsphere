@@ -43,10 +43,10 @@ export const fetchSingleBlog = async (id) => {
 };
 
 // Fetch my blogs
-export const fetchMyBlogs = async () => {
+export const fetchMyBlogs = async (page) => {
     try 
     {
-        const response = await axios.get(`${backendURL}/blog/myBlogs/`, axiosOptions);
+        const response = await axios.get(`${backendURL}/blog/myBlogs?page=${page}`, axiosOptions);
         return ApiResponse(response).data;
     } 
     catch (error) 
