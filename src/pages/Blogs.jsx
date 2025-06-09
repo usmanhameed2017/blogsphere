@@ -19,7 +19,7 @@ function Blogs() {
         <div className="blog-container">
             {/* Hero Section */}
             <section className="home-hero" style={{ backgroundColor: '#1e1f26', color: 'white', padding: '4rem 2rem', textAlign: 'center' }}>
-                <h1>EXPLORE BLOGS</h1>
+                <h1>Explore Blogs</h1>
                 <p>Explore a world of ideas, insights, and inspiration. Join our community of writers and readers, and discover stories that matter.</p>
                 <p>
                     Dive into a diverse range of topics from technology, lifestyle, personal growth, to the latest industry trends.

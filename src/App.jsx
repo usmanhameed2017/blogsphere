@@ -16,6 +16,7 @@ import ResetPassword from './pages/security/ResetPassword';
 import ForgotPassword from './pages/security/ForgotPassword';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Privacy from './pages/Privacy';
 
 
 function App() 
@@ -28,6 +29,7 @@ function App()
           <Route path='/' element={ <Home /> } />
           <Route path='/about' element={ <About /> } />
           <Route path='/contact' element={ <Contact /> } />
+          <Route path='/privacy' element={ <Privacy /> } />
 
           {/* Protected Route */}
           <Route element={ <ProtectedRoute /> } >
