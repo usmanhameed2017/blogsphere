@@ -8,9 +8,10 @@ import { getUser } from '../../../constants';
 function NavbarBS() {
     const { userLogout } = useAuth();
     const [showDropdown, setShowDropdown] = useState(false);
-
     const toggleDropdown = () => setShowDropdown(!showDropdown);
+    
     const user = getUser();
+    const profile_image = user?.profile_image || '/default-avatar.webp';
 
     return (
         <Container fluid>
@@ -40,7 +41,7 @@ function NavbarBS() {
                                     {
                                         user ? (
                                             <div className="user-dropdown" onClick={toggleDropdown}>
-                                                <img src={ user?.profile_image || '/default-avatar.webp' } alt="Profile" className="profile-img" />
+                                                <img src={ profile_image } alt={ profile_image } className="profile-img" />
                                                 <span className="user-name">{ user?.fname }</span>
                                                 <FaChevronDown className="dropdown-icon" />
                                                 {

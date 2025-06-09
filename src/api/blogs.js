@@ -4,10 +4,10 @@ import { ApiResponse } from "../utils/ApiResponse";
 import { ApiError } from "../utils/ApiError";
 
 // Fetch all blogs
-export const fetchAllBlogs = async () => {
+export const fetchAllBlogs = async (page) => {
     try 
     {
-        const response = await axios.get(`${backendURL}/blog`, axiosOptions);
+        const response = await axios.get(`${backendURL}/blog?page=${page}`, axiosOptions);
         return ApiResponse(response).data;
     } 
     catch (error) 

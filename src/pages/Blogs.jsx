@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { fetchAllBlogs } from '../api/blogs';
 import CardBS from '../components/card';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Pagination } from 'react-bootstrap';
 
 function Blogs() {
     const [blogs, setBlogs] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
-        fetchAllBlogs()
+        fetchAllBlogs(currentPage)
             .then(response => setBlogs(response))
             .catch(error => console.log(error.message))
-    }, []);
+    }, [currentPage]);
     console.log("All Blogs:", blogs);
 
     return (
@@ -38,7 +39,7 @@ function Blogs() {
                             <Col key={blog._id} xs={12} sm={6} md={4} lg={3} className="d-flex justify-content-center mb-4">
                                 <CardBS 
                                     _id={blog._id}
-                                    coverImage={blog.coverImage}
+                                    coverImage={blog.coverImage || `/default-blog-title-image.jpeg`}
                                     title={blog.title}
                                     description={blog.description}
                                     likes={blog.likes}
@@ -54,6 +55,43 @@ function Blogs() {
                             </Col>
                         )
                     }
+                </Row>
+
+                {/* Pagination row */}
+                <Row>
+                    <Col>
+                        <Pagination>
+
+                            {/* Previous Button */}
+                            <Pagination.First 
+                            onClick={ () => setCurrentPage(blogs?.prevPage) } 
+                            disabled={ blogs?.prevPage === null }
+                            />
+
+                            {/* Button Numbers */}
+                            {
+                                Array.from({ length:blogs?.totalPages }, (_, index) => (
+                                    <Pagination.Item 
+                                    key={ index } 
+                                    onClick={ () => setCurrentPage(index + 1) } 
+                                    active={ index + 1 == blogs?.page }
+                                    > 
+                                        { index + 1 } 
+                                    </Pagination.Item>
+                                ))
+                            }
+                            
+
+                            {/* <Pagination.Ellipsis /> */}
+
+                            {/* Next Button */}
+                            <Pagination.Last
+                            onClick={ () => setCurrentPage(blogs?.nextPage) }
+                            disabled={ blogs?.nextPage === null }
+                            />
+                            
+                        </Pagination>
+                    </Col>
                 </Row>
             </Container>
         </div>
