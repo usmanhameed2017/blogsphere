@@ -48,7 +48,7 @@ BlogSphere is a full-stack modern blogging platform built using the MERN (MongoD
 - Multer for image handling
 - Cloudinary for image hosting
 
-### 🌐 Frontend (if included)
+### 🌐 Frontend
 - React.js (optional in this repo)
 - React Router Dom
 - Axios for HTTP requests
